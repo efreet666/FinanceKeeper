@@ -21,10 +21,25 @@ class AddIncomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        view.backgroundColor = UIColor.black
+        view.isOpaque = false
+        let newView = UIView(frame: CGRect(x: 0, y: 300, width: self.view.frame.width, height: 800))
+        newView.backgroundColor = .systemBackground
+        newView.layer.cornerRadius = 20
+        
+        self.view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        
+        // self.view is now a transparent view, so now I add newView to it and can size it however, I like.
+        
+        self.view.addSubview(newView)
+        
+        
+        // works without the tap gesture just fine (only dragging), but I also wanted to be able to tap anywhere and dismiss it, so I added the gesture below
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        self.view.addGestureRecognizer(tap)
         setupTextField()
         setupButton()
-        
-        
     }
     func setupTextField() {
         incomeTextField.backgroundColor = .white
@@ -38,9 +53,10 @@ class AddIncomeViewController: UIViewController {
         incomeTextField.clearButtonMode = UITextField.ViewMode.whileEditing
         incomeTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         self.view.addSubview(incomeTextField)
+        
         incomeTextField.snp.makeConstraints { make in
             make.trailing.leading.equalToSuperview().inset(15)
-            make.top.equalToSuperview().inset(30)
+            make.bottom.equalToSuperview().inset(400)
             make.height.equalTo(45)
         }
     }
@@ -63,17 +79,22 @@ class AddIncomeViewController: UIViewController {
     @objc func addNewIncome(button: UIButton) {
         
         let newIncomeText = incomeTextField.text
-        
-        myIncome.name = newIncomeText ?? ""
-        myIncome.date = NSDate(timeIntervalSinceNow: 0)
-    
-        try! realm.write {
-            realm.add(myIncome)
+        if newIncomeText != "" {
+            myIncome.name = newIncomeText ?? ""
+            myIncome.date = NSDate(timeIntervalSinceNow: 0)
+            
+            try! realm.write {
+                realm.add(myIncome)
+            }
+            delegate?.reloadTableView()
+            
+            dismiss(animated: true, completion: nil)
         }
-        delegate?.reloadTableView()
         
-        dismiss(animated: true, completion: nil)
     }
     
-    
+    //
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        dismiss(animated: true, completion: nil)
+    }
 }

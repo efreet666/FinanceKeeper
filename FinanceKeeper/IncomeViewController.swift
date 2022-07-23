@@ -42,16 +42,22 @@ class IncomeViewController: UIViewController {
     }
     
     func segueToAddIncomeVC() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "AddIncomeViewController")
-                if let presentationController = viewController.presentationController as? UISheetPresentationController {
-                    presentationController.delegate = self
-                    presentationController.detents = [.medium()]
-                    presentationController.prefersGrabberVisible = true
-                    presentationController.preferredCornerRadius = 32
-                }
-                
-                self.present(viewController, animated: true)
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                let viewController = storyboard.instantiateViewController(withIdentifier: "AddIncomeViewController")
+//
+//                if let presentationController = viewController.presentationController as? UISheetPresentationController {
+//                    presentationController.detents = [.medium()]
+//                    presentationController.prefersGrabberVisible = true
+//                    presentationController.preferredCornerRadius = 32
+//                }
+//
+//                self.present(viewController, animated: true)
+        
+        let modalViewController = AddIncomeViewController()
+        modalViewController.modalPresentationStyle = .popover
+        modalViewController.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+        modalViewController.delegate = self
+        present(modalViewController, animated: true, completion: nil)
     }
 
 }
