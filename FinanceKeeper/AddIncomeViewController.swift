@@ -25,6 +25,10 @@ class AddIncomeViewController: UIViewController {
         setupButton()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        incomeTextField.becomeFirstResponder()
+    }
     //MARK: - Modal View
     
     func setupModalView(){
