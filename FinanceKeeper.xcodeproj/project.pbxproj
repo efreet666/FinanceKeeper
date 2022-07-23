@@ -7,15 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		98D5CF26F57DF702A9EB1384 /* Pods_FinanceKeeper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F159D4D1E871A92E4C59204 /* Pods_FinanceKeeper.framework */; };
 		F54F6F2F288B3CFB003673C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F6F2E288B3CFB003673C0 /* AppDelegate.swift */; };
 		F54F6F31288B3CFB003673C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F6F30288B3CFB003673C0 /* SceneDelegate.swift */; };
 		F54F6F33288B3CFB003673C0 /* IncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F6F32288B3CFB003673C0 /* IncomeViewController.swift */; };
 		F54F6F36288B3CFB003673C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F54F6F34288B3CFB003673C0 /* Main.storyboard */; };
 		F54F6F38288B3D00003673C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F54F6F37288B3D00003673C0 /* Assets.xcassets */; };
 		F54F6F3B288B3D00003673C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F54F6F39288B3D00003673C0 /* LaunchScreen.storyboard */; };
+		F54F6F43288C3513003673C0 /* AddIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F6F42288C3513003673C0 /* AddIncomeViewController.swift */; };
+		F54F6F45288C6096003673C0 /* IncomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F6F44288C6096003673C0 /* IncomeModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		44AC0474152458DFD79BE6FA /* Pods-FinanceKeeper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinanceKeeper.debug.xcconfig"; path = "Target Support Files/Pods-FinanceKeeper/Pods-FinanceKeeper.debug.xcconfig"; sourceTree = "<group>"; };
+		5F159D4D1E871A92E4C59204 /* Pods_FinanceKeeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinanceKeeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB6140104350EB8206D142F1 /* Pods-FinanceKeeper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinanceKeeper.release.xcconfig"; path = "Target Support Files/Pods-FinanceKeeper/Pods-FinanceKeeper.release.xcconfig"; sourceTree = "<group>"; };
 		F54F6F2B288B3CFB003673C0 /* FinanceKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinanceKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54F6F2E288B3CFB003673C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F54F6F30288B3CFB003673C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +30,8 @@
 		F54F6F37288B3D00003673C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F54F6F3A288B3D00003673C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F54F6F3C288B3D00003673C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F54F6F42288C3513003673C0 /* AddIncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeViewController.swift; sourceTree = "<group>"; };
+		F54F6F44288C6096003673C0 /* IncomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +39,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98D5CF26F57DF702A9EB1384 /* Pods_FinanceKeeper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D2E74791095B1BA232A5C88 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5F159D4D1E871A92E4C59204 /* Pods_FinanceKeeper.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D797A69EFECF52E9F27DEDAE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				44AC0474152458DFD79BE6FA /* Pods-FinanceKeeper.debug.xcconfig */,
+				DB6140104350EB8206D142F1 /* Pods-FinanceKeeper.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		F54F6F22288B3CFB003673C0 = {
 			isa = PBXGroup;
 			children = (
 				F54F6F2D288B3CFB003673C0 /* FinanceKeeper */,
 				F54F6F2C288B3CFB003673C0 /* Products */,
+				D797A69EFECF52E9F27DEDAE /* Pods */,
+				1D2E74791095B1BA232A5C88 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,7 +87,9 @@
 				F54F6F2E288B3CFB003673C0 /* AppDelegate.swift */,
 				F54F6F30288B3CFB003673C0 /* SceneDelegate.swift */,
 				F54F6F32288B3CFB003673C0 /* IncomeViewController.swift */,
+				F54F6F42288C3513003673C0 /* AddIncomeViewController.swift */,
 				F54F6F34288B3CFB003673C0 /* Main.storyboard */,
+				F54F6F44288C6096003673C0 /* IncomeModel.swift */,
 				F54F6F37288B3D00003673C0 /* Assets.xcassets */,
 				F54F6F39288B3D00003673C0 /* LaunchScreen.storyboard */,
 				F54F6F3C288B3D00003673C0 /* Info.plist */,
@@ -74,9 +104,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F54F6F3F288B3D00003673C0 /* Build configuration list for PBXNativeTarget "FinanceKeeper" */;
 			buildPhases = (
+				E2B20E6088515D45DECD452E /* [CP] Check Pods Manifest.lock */,
 				F54F6F27288B3CFB003673C0 /* Sources */,
 				F54F6F28288B3CFB003673C0 /* Frameworks */,
 				F54F6F29288B3CFB003673C0 /* Resources */,
+				4DBB4F1F9AD9F22B232CAFE0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,14 +165,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4DBB4F1F9AD9F22B232CAFE0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FinanceKeeper/Pods-FinanceKeeper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FinanceKeeper/Pods-FinanceKeeper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FinanceKeeper/Pods-FinanceKeeper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2B20E6088515D45DECD452E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FinanceKeeper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F54F6F27288B3CFB003673C0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				F54F6F33288B3CFB003673C0 /* IncomeViewController.swift in Sources */,
+				F54F6F45288C6096003673C0 /* IncomeModel.swift in Sources */,
 				F54F6F2F288B3CFB003673C0 /* AppDelegate.swift in Sources */,
 				F54F6F31288B3CFB003673C0 /* SceneDelegate.swift in Sources */,
+				F54F6F43288C3513003673C0 /* AddIncomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +360,7 @@
 		};
 		F54F6F40288B3D00003673C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44AC0474152458DFD79BE6FA /* Pods-FinanceKeeper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -311,6 +388,7 @@
 		};
 		F54F6F41288B3D00003673C0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB6140104350EB8206D142F1 /* Pods-FinanceKeeper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Income View Controller-->
+        <!--Доходы-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="IncomeViewController" customModule="FinanceKeeper" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,11 +18,38 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Kl6-ja-P45"/>
+                    <navigationItem key="navigationItem" title="Доходы" leftItemsSupplementBackButton="YES" id="Kl6-ja-P45">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="57q-yo-xDF">
+                            <connections>
+                                <action selector="addNewIncomeButton:" destination="BYZ-38-t0r" id="v5x-Ib-fN2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="mmT-b2-I8W" kind="show" identifier="AddIncomeViewController" id="tkl-3o-dJx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1865.217391304348" y="70.982142857142847"/>
+        </scene>
+        <!--Add Income View Controller-->
+        <scene sceneID="4f1-BZ-eZ8">
+            <objects>
+                <viewController storyboardIdentifier="AddIncomeViewController" id="mmT-b2-I8W" customClass="AddIncomeViewController" customModule="FinanceKeeper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gB7-um-kfc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="cIi-80-Nsi"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="yGL-5m-028"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lAz-c8-ZDb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2759" y="71"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="br1-2v-o4Z">
@@ -30,6 +57,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Hdu-1b-T1X" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rbu-6A-N2j">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -59,11 +87,11 @@
             </objects>
             <point key="canvasLocation" x="955" y="-640"/>
         </scene>
-        <!--Item-->
+        <!--1-->
         <scene sceneID="Eoi-Gj-gjX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CxF-sV-2dR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="BO8-ES-YdV"/>
+                    <tabBarItem key="tabBarItem" title="1" image="square.and.arrow.up.circle" catalog="system" id="BO8-ES-YdV"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gjF-Z2-vXN">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -96,6 +124,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="square.and.arrow.up.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

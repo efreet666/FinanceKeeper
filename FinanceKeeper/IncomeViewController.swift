@@ -6,35 +6,76 @@
 //
 
 import UIKit
+import SnapKit
+import RealmSwift
+
+protocol updateTableViewDelegate: IncomeViewController {
+    func reloadTableView()
+}
 
 class IncomeViewController: UIViewController {
 
+    let realm = try! Realm()
+    
     let incomeTableView = UITableView()
     
+    @IBAction func addNewIncomeButton(_ sender: Any) {
+        segueToAddIncomeVC()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
+        
+    }
+    
+    //MARK: - setupTableView
+    func setupTableView() {
+        incomeTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         incomeTableView.delegate = self
         incomeTableView.dataSource = self
-        incomeTableView.translatesAutoresizingMaskIntoConstraints = true
-        incomeTableView.center = view.center
+        
         view.addSubview(incomeTableView)
-       
+        incomeTableView.snp.makeConstraints { make in
+            make.top.bottom.trailing.leading.equalToSuperview()
+        }
     }
-
+    
+    func segueToAddIncomeVC() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier: "AddIncomeViewController")
+                if let presentationController = viewController.presentationController as? UISheetPresentationController {
+                    presentationController.delegate = self
+                    presentationController.detents = [.medium()]
+                    presentationController.prefersGrabberVisible = true
+                    presentationController.preferredCornerRadius = 32
+                }
+                
+                self.present(viewController, animated: true)
+    }
 
 }
 
 extension IncomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        let myIncomes = realm.objects(Income.self)
+        print(myIncomes)
+        return myIncomes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "\(indexPath)"
+        let myIncomes = realm.objects(Income.self)
+        let currentIncome = myIncomes[indexPath.row]
+        cell.textLabel?.text = "\(currentIncome.name)"
         return cell
     }
     
     
+}
+
+extension IncomeViewController: updateTableViewDelegate {
+    func reloadTableView() {
+        incomeTableView.reloadData()
+    }
 }
