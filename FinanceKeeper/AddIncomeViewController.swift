@@ -20,8 +20,14 @@ class AddIncomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        setupModalView()
+        setupTextField()
+        setupButton()
+    }
+    
+    //MARK: - Modal View
+    
+    func setupModalView(){
         view.backgroundColor = UIColor.black
         view.isOpaque = false
         let newView = UIView(frame: CGRect(x: 0, y: 300, width: self.view.frame.width, height: 800))
@@ -34,13 +40,13 @@ class AddIncomeViewController: UIViewController {
         
         self.view.addSubview(newView)
         
-        
         // works without the tap gesture just fine (only dragging), but I also wanted to be able to tap anywhere and dismiss it, so I added the gesture below
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
-        setupTextField()
-        setupButton()
     }
+    
+    //MARK: - TextField
+    
     func setupTextField() {
         incomeTextField.backgroundColor = .white
         incomeTextField.textColor = .black
@@ -61,6 +67,7 @@ class AddIncomeViewController: UIViewController {
         }
     }
     
+    //MARK: - Add button
     func setupButton() {
         addIncomeButton.setTitle("Добавить доход", for: .normal)
         addIncomeButton.setTitleColor(.white, for: .normal)
@@ -76,8 +83,9 @@ class AddIncomeViewController: UIViewController {
         addIncomeButton.addTarget(self, action: #selector(addNewIncome(button:)), for: .touchUpInside)
     }
     
+    //MARK: - Add new income to Realm
+    
     @objc func addNewIncome(button: UIButton) {
-        
         let newIncomeText = incomeTextField.text
         if newIncomeText != "" {
             myIncome.name = newIncomeText ?? ""
@@ -90,10 +98,9 @@ class AddIncomeViewController: UIViewController {
             
             dismiss(animated: true, completion: nil)
         }
-        
     }
     
-    //
+    //MARK: - Dismiss view with gesture
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         dismiss(animated: true, completion: nil)
     }

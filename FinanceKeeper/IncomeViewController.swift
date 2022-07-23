@@ -73,7 +73,7 @@ extension IncomeViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let myIncomes = realm.objects(Income.self)
         let currentIncome = myIncomes[indexPath.row]
-        cell.textLabel?.text = "\(currentIncome.name)"
+        cell.textLabel?.text = "\(currentIncome.name) Р"
         return cell
     }
     
