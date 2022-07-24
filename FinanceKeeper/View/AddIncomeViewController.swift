@@ -23,12 +23,9 @@ class AddIncomeViewController: UIViewController {
         setupModalView()
         setupTextField()
         setupButton()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         incomeTextField.becomeFirstResponder()
     }
+    
     //MARK: - Modal View
     
     func setupModalView(){
@@ -39,11 +36,8 @@ class AddIncomeViewController: UIViewController {
         newView.layer.cornerRadius = 20
         
         self.view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-        
-        // self.view is now a transparent view, so now I add newView to it and can size it however, I like.
-        
+
         self.view.addSubview(newView)
-        
         // works without the tap gesture just fine (only dragging), but I also wanted to be able to tap anywhere and dismiss it, so I added the gesture below
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
@@ -54,7 +48,8 @@ class AddIncomeViewController: UIViewController {
     func setupTextField() {
         incomeTextField.backgroundColor = .white
         incomeTextField.textColor = .black
-        incomeTextField.placeholder = "Enter text here"
+        incomeTextField.placeholder = "Сумма"
+        incomeTextField.tintColor = .gray
         incomeTextField.font = UIFont.systemFont(ofSize: 15)
         incomeTextField.borderStyle = UITextField.BorderStyle.roundedRect
         incomeTextField.autocorrectionType = UITextAutocorrectionType.no

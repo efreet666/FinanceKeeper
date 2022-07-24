@@ -25,7 +25,7 @@
 		F54F6F2B288B3CFB003673C0 /* FinanceKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinanceKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54F6F2E288B3CFB003673C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F54F6F30288B3CFB003673C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F54F6F32288B3CFB003673C0 /* IncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeViewController.swift; sourceTree = "<group>"; };
+		F54F6F32288B3CFB003673C0 /* IncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IncomeViewController.swift; path = "../New Group/IncomeViewController.swift"; sourceTree = "<group>"; };
 		F54F6F35288B3CFB003673C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F54F6F37288B3D00003673C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F54F6F3A288B3D00003673C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -84,17 +84,41 @@
 		F54F6F2D288B3CFB003673C0 /* FinanceKeeper */ = {
 			isa = PBXGroup;
 			children = (
-				F54F6F2E288B3CFB003673C0 /* AppDelegate.swift */,
-				F54F6F30288B3CFB003673C0 /* SceneDelegate.swift */,
-				F54F6F32288B3CFB003673C0 /* IncomeViewController.swift */,
-				F54F6F42288C3513003673C0 /* AddIncomeViewController.swift */,
+				F54F6F46288C9ADD003673C0 /* View */,
 				F54F6F34288B3CFB003673C0 /* Main.storyboard */,
-				F54F6F44288C6096003673C0 /* IncomeModel.swift */,
-				F54F6F37288B3D00003673C0 /* Assets.xcassets */,
-				F54F6F39288B3D00003673C0 /* LaunchScreen.storyboard */,
+				F54F6F47288C9AF3003673C0 /* Model */,
+				F54F6F48288C9AFA003673C0 /* Resourses */,
 				F54F6F3C288B3D00003673C0 /* Info.plist */,
 			);
 			path = FinanceKeeper;
+			sourceTree = "<group>";
+		};
+		F54F6F46288C9ADD003673C0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F54F6F32288B3CFB003673C0 /* IncomeViewController.swift */,
+				F54F6F42288C3513003673C0 /* AddIncomeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F54F6F47288C9AF3003673C0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F54F6F44288C6096003673C0 /* IncomeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F54F6F48288C9AFA003673C0 /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+				F54F6F37288B3D00003673C0 /* Assets.xcassets */,
+				F54F6F2E288B3CFB003673C0 /* AppDelegate.swift */,
+				F54F6F30288B3CFB003673C0 /* SceneDelegate.swift */,
+				F54F6F39288B3D00003673C0 /* LaunchScreen.storyboard */,
+			);
+			path = Resourses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

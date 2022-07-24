@@ -18,6 +18,8 @@ class IncomeViewController: UIViewController {
     let realm = try! Realm()
     
     let incomeTableView = UITableView()
+    let totalIncomeLabel = UILabel()
+    let currentBalanceLabel = UILabel()
     
     @IBAction func addNewIncomeButton(_ sender: Any) {
         segueToAddIncomeVC()
@@ -26,7 +28,36 @@ class IncomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        setupTotalLabel()
+    }
+    
+    //MARK: - Total label
+    func setupTotalLabel() {
+        let myIncomes = realm.objects(Income.self)
+        let incomesName = myIncomes
+        var total: Int = 0
+        for income in incomesName {
+            print(income.name)
+            total += Int(income.name) ?? 0
+        }
         
+        totalIncomeLabel.text = "\(total) Р"
+        totalIncomeLabel.textAlignment = .right
+        self.view.addSubview(totalIncomeLabel)
+        totalIncomeLabel.snp.makeConstraints { make in
+            make.trailing.leading.top.equalToSuperview().inset(80)
+            make.height.equalTo(60)
+        }
+        
+        currentBalanceLabel.text = "Текущий баланс"
+        currentBalanceLabel.textAlignment = .left
+        self.view.addSubview(currentBalanceLabel)
+        currentBalanceLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(80)
+            make.leading.equalToSuperview().inset(20)
+            make.trailing.equalTo(totalIncomeLabel).inset(20)
+            make.height.equalTo(60)
+        }
     }
     
     //MARK: - setupTableView
@@ -37,22 +68,12 @@ class IncomeViewController: UIViewController {
         
         view.addSubview(incomeTableView)
         incomeTableView.snp.makeConstraints { make in
-            make.top.bottom.trailing.leading.equalToSuperview()
+            make.bottom.trailing.leading.equalToSuperview()
+            make.top.equalToSuperview().offset(150)
         }
     }
     
     func segueToAddIncomeVC() {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let viewController = storyboard.instantiateViewController(withIdentifier: "AddIncomeViewController")
-//
-//                if let presentationController = viewController.presentationController as? UISheetPresentationController {
-//                    presentationController.detents = [.medium()]
-//                    presentationController.prefersGrabberVisible = true
-//                    presentationController.preferredCornerRadius = 32
-//                }
-//
-//                self.present(viewController, animated: true)
-        
         let modalViewController = AddIncomeViewController()
         modalViewController.modalPresentationStyle = .popover
         modalViewController.modalTransitionStyle = UIModalTransitionStyle.coverVertical
@@ -77,11 +98,29 @@ extension IncomeViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
     
+    // MARK: - Deleting
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let myIncomes = realm.objects(Income.self)
+            
+            let currentIncome = myIncomes[indexPath.row]
+            try! realm.write {
+                realm.delete(currentIncome)
+            }
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            setupTotalLabel()
+        }
+    }
+
 }
 
 extension IncomeViewController: updateTableViewDelegate {
     func reloadTableView() {
         incomeTableView.reloadData()
+        setupTotalLabel()
     }
 }
