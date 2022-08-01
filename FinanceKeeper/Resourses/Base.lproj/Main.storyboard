@@ -63,7 +63,7 @@
                     <connections>
                         <segue destination="CxF-sV-2dR" kind="relationship" relationship="viewControllers" id="dc4-KX-y0z"/>
                         <segue destination="4B4-gG-Izi" kind="relationship" relationship="viewControllers" id="DMX-bN-Yzk"/>
-                        <segue destination="b9g-WT-OWS" kind="relationship" relationship="viewControllers" id="gkg-PV-1fU"/>
+                        <segue destination="m8Z-EZ-Ctj" kind="relationship" relationship="viewControllers" id="gkg-PV-1fU"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LyB-xd-eNf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -73,18 +73,18 @@
         <!--Расходы-->
         <scene sceneID="pIv-s6-fPl">
             <objects>
-                <viewController id="b9g-WT-OWS" sceneMemberID="viewController">
+                <viewController id="b9g-WT-OWS" customClass="ExpenseViewController" customModule="FinanceKeeper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NyD-wT-z12">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="XJX-IX-k7H"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Расходы" image="tray.and.arrow.up" catalog="system" id="MCG-Ro-R4x"/>
+                    <navigationItem key="navigationItem" title="Расходы" id="IlF-H0-RmK"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gQS-YT-PmJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="955" y="-640"/>
+            <point key="canvasLocation" x="1863.7681159420292" y="-640.17857142857144"/>
         </scene>
         <!--Доходы-->
         <scene sceneID="Eoi-Gj-gjX">
@@ -120,6 +120,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aVR-yK-P0j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="955" y="807"/>
+        </scene>
+        <!--Расходы-->
+        <scene sceneID="ZEY-m0-NWa">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="m8Z-EZ-Ctj" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Расходы" image="tray.and.arrow.up" catalog="system" id="MCG-Ro-R4x"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cdJ-SI-kRV">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="b9g-WT-OWS" kind="relationship" relationship="rootViewController" id="Rfg-LO-9uc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fc3-Tw-sk1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="953.62318840579712" y="-640.17857142857144"/>
         </scene>
     </scenes>
     <resources>

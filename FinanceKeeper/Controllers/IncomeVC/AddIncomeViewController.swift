@@ -15,7 +15,7 @@ class AddIncomeViewController: UIViewController {
     let incomeTextField = UITextField()
     let addIncomeButton = UIButton()
     
-    let myIncome = Income()
+    let myIncome = NewIncome()
     let realm = try! Realm()
     
     override func viewDidLoad() {
@@ -87,7 +87,7 @@ class AddIncomeViewController: UIViewController {
     @objc func addNewIncome(button: UIButton) {
         let newIncomeText = incomeTextField.text
         if newIncomeText != "" {
-            myIncome.name = newIncomeText ?? ""
+            myIncome.amount = newIncomeText ?? ""
             myIncome.date = NSDate(timeIntervalSinceNow: 0)
             
             try! realm.write {

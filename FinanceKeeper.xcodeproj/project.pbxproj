@@ -18,6 +18,7 @@
 		F54F6F45288C6096003673C0 /* IncomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F6F44288C6096003673C0 /* IncomeModel.swift */; };
 		F557F88628985875002C6653 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F557F88428985875002C6653 /* HeaderTableViewCell.swift */; };
 		F557F88728985875002C6653 /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F557F88528985875002C6653 /* HeaderTableViewCell.xib */; };
+		F557F88B289867AE002C6653 /* ExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F557F88A289867AE002C6653 /* ExpenseViewController.swift */; };
 		F5FAD451289820D700392D6E /* IncomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAD44F289820D700392D6E /* IncomeTableViewCell.swift */; };
 		F5FAD452289820D700392D6E /* IncomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5FAD450289820D700392D6E /* IncomeTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -29,7 +30,7 @@
 		F54F6F2B288B3CFB003673C0 /* FinanceKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinanceKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54F6F2E288B3CFB003673C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F54F6F30288B3CFB003673C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F54F6F32288B3CFB003673C0 /* IncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IncomeViewController.swift; path = "../New Group/IncomeViewController.swift"; sourceTree = "<group>"; };
+		F54F6F32288B3CFB003673C0 /* IncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeViewController.swift; sourceTree = "<group>"; };
 		F54F6F35288B3CFB003673C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F54F6F37288B3D00003673C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F54F6F3A288B3D00003673C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -38,6 +39,7 @@
 		F54F6F44288C6096003673C0 /* IncomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeModel.swift; sourceTree = "<group>"; };
 		F557F88428985875002C6653 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
 		F557F88528985875002C6653 /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
+		F557F88A289867AE002C6653 /* ExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewController.swift; sourceTree = "<group>"; };
 		F5FAD44F289820D700392D6E /* IncomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeTableViewCell.swift; sourceTree = "<group>"; };
 		F5FAD450289820D700392D6E /* IncomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomeTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,8 +106,8 @@
 		F54F6F46288C9ADD003673C0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F54F6F32288B3CFB003673C0 /* IncomeViewController.swift */,
-				F54F6F42288C3513003673C0 /* AddIncomeViewController.swift */,
+				F557F88928986789002C6653 /* ExpenseVC */,
+				F557F8882898677A002C6653 /* IncomeVC */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -137,6 +139,23 @@
 				F557F88528985875002C6653 /* HeaderTableViewCell.xib */,
 			);
 			path = "Header cell";
+			sourceTree = "<group>";
+		};
+		F557F8882898677A002C6653 /* IncomeVC */ = {
+			isa = PBXGroup;
+			children = (
+				F54F6F32288B3CFB003673C0 /* IncomeViewController.swift */,
+				F54F6F42288C3513003673C0 /* AddIncomeViewController.swift */,
+			);
+			path = IncomeVC;
+			sourceTree = "<group>";
+		};
+		F557F88928986789002C6653 /* ExpenseVC */ = {
+			isa = PBXGroup;
+			children = (
+				F557F88A289867AE002C6653 /* ExpenseViewController.swift */,
+			);
+			path = ExpenseVC;
 			sourceTree = "<group>";
 		};
 		F5FAD44E2898201A00392D6E /* Views */ = {
@@ -279,6 +298,7 @@
 				F5FAD451289820D700392D6E /* IncomeTableViewCell.swift in Sources */,
 				F557F88628985875002C6653 /* HeaderTableViewCell.swift in Sources */,
 				F54F6F2F288B3CFB003673C0 /* AppDelegate.swift in Sources */,
+				F557F88B289867AE002C6653 /* ExpenseViewController.swift in Sources */,
 				F54F6F31288B3CFB003673C0 /* SceneDelegate.swift in Sources */,
 				F54F6F43288C3513003673C0 /* AddIncomeViewController.swift in Sources */,
 			);

@@ -8,8 +8,15 @@
 import Foundation
 import RealmSwift
 
-class Income: Object {
-    @objc dynamic var name = ""
-    @objc dynamic var category = false
+class NewIncome: Object {
+    @objc dynamic var amount = ""
+    @objc dynamic var category = ""
     @objc dynamic var date: NSDate = NSDate(timeIntervalSinceNow: 0)
 }
+
+class NewExpense: Object {
+    @objc dynamic var amount = ""
+    @objc dynamic var category = ""
+    @objc dynamic var date: NSDate = NSDate(timeIntervalSinceNow: 0)
+}
+
