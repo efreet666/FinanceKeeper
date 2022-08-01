@@ -29,6 +29,9 @@ class IncomeViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupTotalLabel()
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationItem.largeTitleDisplayMode = .always
+
     }
     
     //MARK: - Total label
@@ -51,9 +54,10 @@ class IncomeViewController: UIViewController {
         
         currentBalanceLabel.text = "Текущий баланс"
         currentBalanceLabel.textAlignment = .left
+        
         self.view.addSubview(currentBalanceLabel)
         currentBalanceLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(80)
+            make.top.equalToSuperview().inset(100)
             make.leading.equalToSuperview().inset(20)
             make.trailing.equalTo(totalIncomeLabel).inset(20)
             make.height.equalTo(60)
@@ -66,7 +70,7 @@ class IncomeViewController: UIViewController {
         incomeTableView.delegate = self
         incomeTableView.dataSource = self
         
-        view.addSubview(incomeTableView)
+        view.addSubview(incomeTableView) 
         incomeTableView.snp.makeConstraints { make in
             make.bottom.trailing.leading.equalToSuperview()
             make.top.equalToSuperview().offset(150)
