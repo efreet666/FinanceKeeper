@@ -67,14 +67,14 @@ extension IncomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let myIncomes = realm.objects(Income.self)
         print(myIncomes)
-        return myIncomes.count
+        return (myIncomes.count) + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row != 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "IncomeTableViewCell", for: indexPath) as! IncomeTableViewCell
             let myIncomes = realm.objects(Income.self)
-            let currentIncome = myIncomes[indexPath.row]
+            let currentIncome = myIncomes[indexPath.row - 1]
             cell.moneyLabelOutlet.text =  "\(currentIncome.name) Р"
             
             let formatter = DateFormatter()
@@ -108,7 +108,11 @@ extension IncomeViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
+        if indexPath.row != 0 {
+            return .delete
+        } else {
+            return .none
+        }
     }
     
     // MARK: - Deleting
@@ -116,7 +120,7 @@ extension IncomeViewController: UITableViewDataSource, UITableViewDelegate {
         if editingStyle == .delete {
             let myIncomes = realm.objects(Income.self)
             
-            let currentIncome = myIncomes[indexPath.row]
+            let currentIncome = myIncomes[indexPath.row - 1]
             try! realm.write {
                 realm.delete(currentIncome)
             }
