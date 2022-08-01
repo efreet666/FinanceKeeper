@@ -14,7 +14,7 @@ protocol updateTableViewDelegate: IncomeViewController {
 }
 
 class IncomeViewController: UIViewController {
-
+    
     let realm = try! Realm()
     
     let incomeTableView = UITableView()
@@ -28,41 +28,16 @@ class IncomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        setupTotalLabel()
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationItem.largeTitleDisplayMode = .always
-
+        
+        self.incomeTableView.register(UINib(nibName: "IncomeTableViewCell", bundle: nil), forCellReuseIdentifier: "IncomeTableViewCell")
+        self.incomeTableView.register(UINib(nibName: "HeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "HeaderTableViewCell")
+        
+        
+        
     }
     
-    //MARK: - Total label
-    func setupTotalLabel() {
-        let myIncomes = realm.objects(Income.self)
-        let incomesName = myIncomes
-        var total: Int = 0
-        for income in incomesName {
-            print(income.name)
-            total += Int(income.name) ?? 0
-        }
-        
-        totalIncomeLabel.text = "\(total) Р"
-        totalIncomeLabel.textAlignment = .right
-        self.view.addSubview(totalIncomeLabel)
-        totalIncomeLabel.snp.makeConstraints { make in
-            make.trailing.leading.top.equalToSuperview().inset(80)
-            make.height.equalTo(60)
-        }
-        
-        currentBalanceLabel.text = "Текущий баланс"
-        currentBalanceLabel.textAlignment = .left
-        
-        self.view.addSubview(currentBalanceLabel)
-        currentBalanceLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(100)
-            make.leading.equalToSuperview().inset(20)
-            make.trailing.equalTo(totalIncomeLabel).inset(20)
-            make.height.equalTo(60)
-        }
-    }
     
     //MARK: - setupTableView
     func setupTableView() {
@@ -70,10 +45,10 @@ class IncomeViewController: UIViewController {
         incomeTableView.delegate = self
         incomeTableView.dataSource = self
         
-        view.addSubview(incomeTableView) 
+        view.addSubview(incomeTableView)
         incomeTableView.snp.makeConstraints { make in
             make.bottom.trailing.leading.equalToSuperview()
-            make.top.equalToSuperview().offset(150)
+            make.top.equalToSuperview().offset(0)
         }
     }
     
@@ -84,10 +59,11 @@ class IncomeViewController: UIViewController {
         modalViewController.delegate = self
         present(modalViewController, animated: true, completion: nil)
     }
-
+    
 }
 
 extension IncomeViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let myIncomes = realm.objects(Income.self)
         print(myIncomes)
@@ -95,13 +71,42 @@ extension IncomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let myIncomes = realm.objects(Income.self)
-        let currentIncome = myIncomes[indexPath.row]
-        cell.textLabel?.text = "\(currentIncome.name) Р"
-        return cell
+        if indexPath.row != 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "IncomeTableViewCell", for: indexPath) as! IncomeTableViewCell
+            let myIncomes = realm.objects(Income.self)
+            let currentIncome = myIncomes[indexPath.row]
+            cell.moneyLabelOutlet.text =  "\(currentIncome.name) Р"
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "d MMM yyyy"
+            cell.dataLabelOutlet.text = formatter.string(from: currentIncome.date as Date)
+            return cell
+            
+        } else {
+            // Header cell
+            
+            let myIncomes = realm.objects(Income.self)
+            let incomesName = myIncomes
+            var total: Int = 0
+            for income in incomesName {
+                print(income.name)
+                total += Int(income.name) ?? 0
+            }
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderTableViewCell", for: indexPath) as! HeaderTableViewCell
+            cell.totalBalanceOutlet.text = "\(total) Р"
+            return cell
+        }
+
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 100
+        } else {
+            return 60
+        }
+    }
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
@@ -116,15 +121,13 @@ extension IncomeViewController: UITableViewDataSource, UITableViewDelegate {
                 realm.delete(currentIncome)
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
-            setupTotalLabel()
         }
     }
-
+    
 }
 
 extension IncomeViewController: updateTableViewDelegate {
     func reloadTableView() {
         incomeTableView.reloadData()
-        setupTotalLabel()
     }
 }

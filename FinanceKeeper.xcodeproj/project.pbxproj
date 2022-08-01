@@ -16,6 +16,8 @@
 		F54F6F3B288B3D00003673C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F54F6F39288B3D00003673C0 /* LaunchScreen.storyboard */; };
 		F54F6F43288C3513003673C0 /* AddIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F6F42288C3513003673C0 /* AddIncomeViewController.swift */; };
 		F54F6F45288C6096003673C0 /* IncomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F6F44288C6096003673C0 /* IncomeModel.swift */; };
+		F557F88628985875002C6653 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F557F88428985875002C6653 /* HeaderTableViewCell.swift */; };
+		F557F88728985875002C6653 /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F557F88528985875002C6653 /* HeaderTableViewCell.xib */; };
 		F5FAD451289820D700392D6E /* IncomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAD44F289820D700392D6E /* IncomeTableViewCell.swift */; };
 		F5FAD452289820D700392D6E /* IncomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5FAD450289820D700392D6E /* IncomeTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -34,6 +36,8 @@
 		F54F6F3C288B3D00003673C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F54F6F42288C3513003673C0 /* AddIncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeViewController.swift; sourceTree = "<group>"; };
 		F54F6F44288C6096003673C0 /* IncomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeModel.swift; sourceTree = "<group>"; };
+		F557F88428985875002C6653 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
+		F557F88528985875002C6653 /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
 		F5FAD44F289820D700392D6E /* IncomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeTableViewCell.swift; sourceTree = "<group>"; };
 		F5FAD450289820D700392D6E /* IncomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomeTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,7 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				F54F6F2D288B3CFB003673C0 /* FinanceKeeper */,
-				F54F6F3C288B3D00003673C0 /* Info.plist */,
 				F54F6F2C288B3CFB003673C0 /* Products */,
 				D797A69EFECF52E9F27DEDAE /* Pods */,
 				1D2E74791095B1BA232A5C88 /* Frameworks */,
@@ -89,6 +92,7 @@
 		F54F6F2D288B3CFB003673C0 /* FinanceKeeper */ = {
 			isa = PBXGroup;
 			children = (
+				F54F6F3C288B3D00003673C0 /* Info.plist */,
 				F5FAD44E2898201A00392D6E /* Views */,
 				F54F6F46288C9ADD003673C0 /* Controllers */,
 				F54F6F47288C9AF3003673C0 /* Model */,
@@ -126,9 +130,19 @@
 			path = Resourses;
 			sourceTree = "<group>";
 		};
+		F557F8832898585A002C6653 /* Header cell */ = {
+			isa = PBXGroup;
+			children = (
+				F557F88428985875002C6653 /* HeaderTableViewCell.swift */,
+				F557F88528985875002C6653 /* HeaderTableViewCell.xib */,
+			);
+			path = "Header cell";
+			sourceTree = "<group>";
+		};
 		F5FAD44E2898201A00392D6E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F557F8832898585A002C6653 /* Header cell */,
 				F5FAD453289820DF00392D6E /* IncomeCell */,
 			);
 			path = Views;
@@ -206,6 +220,7 @@
 				F54F6F3B288B3D00003673C0 /* LaunchScreen.storyboard in Resources */,
 				F54F6F38288B3D00003673C0 /* Assets.xcassets in Resources */,
 				F5FAD452289820D700392D6E /* IncomeTableViewCell.xib in Resources */,
+				F557F88728985875002C6653 /* HeaderTableViewCell.xib in Resources */,
 				F54F6F36288B3CFB003673C0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +277,7 @@
 				F54F6F33288B3CFB003673C0 /* IncomeViewController.swift in Sources */,
 				F54F6F45288C6096003673C0 /* IncomeModel.swift in Sources */,
 				F5FAD451289820D700392D6E /* IncomeTableViewCell.swift in Sources */,
+				F557F88628985875002C6653 /* HeaderTableViewCell.swift in Sources */,
 				F54F6F2F288B3CFB003673C0 /* AppDelegate.swift in Sources */,
 				F54F6F31288B3CFB003673C0 /* SceneDelegate.swift in Sources */,
 				F54F6F43288C3513003673C0 /* AddIncomeViewController.swift in Sources */,
