@@ -19,6 +19,7 @@
 		F557F88628985875002C6653 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F557F88428985875002C6653 /* HeaderTableViewCell.swift */; };
 		F557F88728985875002C6653 /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F557F88528985875002C6653 /* HeaderTableViewCell.xib */; };
 		F557F88B289867AE002C6653 /* ExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F557F88A289867AE002C6653 /* ExpenseViewController.swift */; };
+		F557F88D2898710A002C6653 /* addExpenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F557F88C2898710A002C6653 /* addExpenceViewController.swift */; };
 		F5FAD451289820D700392D6E /* IncomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAD44F289820D700392D6E /* IncomeTableViewCell.swift */; };
 		F5FAD452289820D700392D6E /* IncomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5FAD450289820D700392D6E /* IncomeTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		F557F88428985875002C6653 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
 		F557F88528985875002C6653 /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
 		F557F88A289867AE002C6653 /* ExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewController.swift; sourceTree = "<group>"; };
+		F557F88C2898710A002C6653 /* addExpenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addExpenceViewController.swift; sourceTree = "<group>"; };
 		F5FAD44F289820D700392D6E /* IncomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeTableViewCell.swift; sourceTree = "<group>"; };
 		F5FAD450289820D700392D6E /* IncomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomeTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				F557F88A289867AE002C6653 /* ExpenseViewController.swift */,
+				F557F88C2898710A002C6653 /* addExpenceViewController.swift */,
 			);
 			path = ExpenseVC;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				F5FAD451289820D700392D6E /* IncomeTableViewCell.swift in Sources */,
 				F557F88628985875002C6653 /* HeaderTableViewCell.swift in Sources */,
 				F54F6F2F288B3CFB003673C0 /* AppDelegate.swift in Sources */,
+				F557F88D2898710A002C6653 /* addExpenceViewController.swift in Sources */,
 				F557F88B289867AE002C6653 /* ExpenseViewController.swift in Sources */,
 				F54F6F31288B3CFB003673C0 /* SceneDelegate.swift in Sources */,
 				F54F6F43288C3513003673C0 /* AddIncomeViewController.swift in Sources */,

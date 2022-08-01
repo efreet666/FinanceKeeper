@@ -1,21 +1,22 @@
 //
-//  AddIncomeViewController.swift
+//  addExpenceViewController.swift
 //  FinanceKeeper
 //
-//  Created by Влад Бокин on 23.07.2022.
+//  Created by Влад Бокин on 01.08.2022.
 //
+
 
 import UIKit
 import RealmSwift
 
-class AddIncomeViewController: UIViewController {
+class addExpenceViewController: UIViewController {
     
-    weak var delegate : updateIncomeTableViewDelegate?
+    weak var delegate : updateExpanceTableViewDelegate?
     
     let incomeTextField = UITextField()
     let addIncomeButton = UIButton()
     
-    let myIncome = NewIncome()
+    let newCategory = ExpenseСategory()
     let realm = try! Realm()
     
     override func viewDidLoad() {
@@ -48,7 +49,7 @@ class AddIncomeViewController: UIViewController {
     func setupTextField() {
         incomeTextField.backgroundColor = .white
         incomeTextField.textColor = .black
-        incomeTextField.placeholder = "Сумма"
+        incomeTextField.placeholder = "Наименование"
         incomeTextField.tintColor = .gray
         incomeTextField.font = UIFont.systemFont(ofSize: 15)
         incomeTextField.borderStyle = UITextField.BorderStyle.roundedRect
@@ -68,7 +69,7 @@ class AddIncomeViewController: UIViewController {
     
     //MARK: - Add button
     func setupButton() {
-        addIncomeButton.setTitle("Добавить доход", for: .normal)
+        addIncomeButton.setTitle("Добавить категорию расходов", for: .normal)
         addIncomeButton.setTitleColor(.white, for: .normal)
         addIncomeButton.setTitleColor(.gray, for: .selected)
         addIncomeButton.backgroundColor = .blue
@@ -85,13 +86,12 @@ class AddIncomeViewController: UIViewController {
     //MARK: - Add new income to Realm
     
     @objc func addNewIncome(button: UIButton) {
-        let newIncomeText = incomeTextField.text
-        if newIncomeText != "" {
-            myIncome.amount = newIncomeText ?? ""
-            myIncome.date = NSDate(timeIntervalSinceNow: 0)
+        let newCategoryText = incomeTextField.text
+        if newCategoryText != "" {
+            newCategory.category = newCategoryText ?? ""
             
             try! realm.write {
-                realm.add(myIncome)
+                realm.add(newCategory)
             }
             delegate?.reloadTableView()
             

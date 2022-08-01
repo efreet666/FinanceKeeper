@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import RealmSwift
 
-protocol updateTableViewDelegate: IncomeViewController {
+protocol updateIncomeTableViewDelegate: IncomeViewController {
     func reloadTableView()
 }
 
@@ -131,7 +131,7 @@ extension IncomeViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
-extension IncomeViewController: updateTableViewDelegate {
+extension IncomeViewController: updateIncomeTableViewDelegate {
     func reloadTableView() {
         incomeTableView.reloadData()
     }

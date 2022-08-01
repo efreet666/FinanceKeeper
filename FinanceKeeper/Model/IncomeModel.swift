@@ -20,3 +20,7 @@ class NewExpense: Object {
     @objc dynamic var date: NSDate = NSDate(timeIntervalSinceNow: 0)
 }
 
+class ExpenseСategory: Object {
+    @objc dynamic var category = ""
+}
+
