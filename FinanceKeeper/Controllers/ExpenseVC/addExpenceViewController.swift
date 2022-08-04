@@ -32,7 +32,7 @@ class addExpenceViewController: UIViewController {
     func setupModalView(){
         view.backgroundColor = UIColor.black
         view.isOpaque = false
-        let newView = UIView(frame: CGRect(x: 0, y: 300, width: self.view.frame.width, height: 800))
+        let newView = UIView(frame: CGRect(x: 0, y: 300, width: self.view.frame.width, height: 650))
         newView.backgroundColor = .systemBackground
         newView.layer.cornerRadius = 20
         
