@@ -1,41 +1,38 @@
 //
-//  ExpenseViewController.swift
+//  ViewController.swift
 //  FinanceKeeper
 //
-//  Created by Влад Бокин on 01.08.2022.
+//  Created by Влад Бокин on 06.08.2022.
 //
 
 import UIKit
 import RealmSwift
 
-protocol updateExpanceTableViewDelegate: ExpenseViewController {
-    func reloadTableView()
-}
-
-class ExpenseViewController: UIViewController {
+class NewExpenceViewController: UIViewController {
 
     let realm = try! Realm()
     
-    let categoryTableView = UITableView()
+    let newExpenseTableView = UITableView()
     let addNewCategoryButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.categoryTableView.dataSource = self
-        self.categoryTableView.delegate = self
-        self.categoryTableView.register(UINib(nibName: "ExpenseTableViewCell", bundle: nil), forCellReuseIdentifier: "ExpenseTableViewCell")
+        self.newExpenseTableView.dataSource = self
+        self.newExpenseTableView.delegate = self
+        self.newExpenseTableView.register(UINib(nibName: "NewExpenseTableViewCell", bundle: nil), forCellReuseIdentifier: "NewExpenseTableViewCell")
+        
         setupView()
     }
     
-    func setupView() {
+    private func setupView() {
         
-        view.addSubview(categoryTableView)
-        categoryTableView.snp.makeConstraints { make in
+        view.addSubview(newExpenseTableView)
+        newExpenseTableView.snp.makeConstraints { make in
             make.top.trailing.leading.equalToSuperview()
             make.bottom.equalToSuperview().inset(100)
         }
         
-        addNewCategoryButton.setTitle("Добавить категорию расходов", for: .normal)
+        addNewCategoryButton.setTitle("Добавить расход", for: .normal)
         addNewCategoryButton.backgroundColor = .blue
         addNewCategoryButton.layer.cornerRadius = 15
         addNewCategoryButton.addTarget(self, action: #selector(openAddSubview), for: .touchUpInside)
@@ -50,18 +47,19 @@ class ExpenseViewController: UIViewController {
     }
     
     @objc func openAddSubview() {
-        let modalViewController = addExpenceViewController()
+        let modalViewController = AddNewExpenseViewController()
         modalViewController.modalPresentationStyle = .popover
         modalViewController.modalTransitionStyle = UIModalTransitionStyle.coverVertical
-        modalViewController.delegate = self
+        //modalViewController.delegate = self
         present(modalViewController, animated: true, completion: nil)
     }
-}
 
-extension ExpenseViewController: UITableViewDelegate, UITableViewDataSource {
+
+}
+extension NewExpenceViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let myExpenseCategory = realm.objects(ExpenseСategory.self)
+        let myExpenseCategory = realm.objects(NewExpenses.self)
         print(myExpenseCategory)
         print(myExpenseCategory.count)
         return (myExpenseCategory.count)
@@ -70,10 +68,12 @@ extension ExpenseViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let myExpenseCategory = realm.objects(ExpenseСategory.self)
+        let myNewExpense = realm.objects(NewExpenses.self)
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseTableViewCell", for: indexPath) as! ExpenseTableViewCell
-        cell.categoryLabelOutlet.text = myExpenseCategory[indexPath.row].category
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NewExpenseTableViewCell", for: indexPath) as! NewExpenseTableViewCell
+        cell.dateLabelOutlet.text = "\(myNewExpense[indexPath.row].date)"
+        cell.expenseLabelOutlet.text = myNewExpense[indexPath.row].amount
+        cell.nameLabelOutlet.text = myNewExpense[indexPath.row].name
         return cell
         
 
@@ -90,20 +90,15 @@ extension ExpenseViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
-            let myExpenseCategory = realm.objects(ExpenseСategory.self)
-            let currentExpenseCategory = myExpenseCategory[indexPath.row]
+            let myNewExpense = realm.objects(NewExpenses.self)
+            let currentExpense = myNewExpense[indexPath.row]
             try! realm.write {
-                realm.delete(currentExpenseCategory)
+                realm.delete(currentExpense)
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.reloadData()
         }
     }
-    
-}
 
-extension ExpenseViewController: updateExpanceTableViewDelegate {
-    func reloadTableView() {
-        categoryTableView.reloadData()
-    }
+    
 }

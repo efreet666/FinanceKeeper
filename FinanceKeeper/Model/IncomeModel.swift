@@ -14,8 +14,9 @@ class NewIncome: Object {
     @objc dynamic var date: NSDate = NSDate(timeIntervalSinceNow: 0)
 }
 
-class NewExpense: Object {
+class NewExpenses: Object {
     @objc dynamic var amount = ""
+    @objc dynamic var name = ""
     @objc dynamic var category = ""
     @objc dynamic var date: NSDate = NSDate(timeIntervalSinceNow: 0)
 }

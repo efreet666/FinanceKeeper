@@ -139,6 +139,19 @@ class AddIncomeViewController: UIViewController {
 extension AddIncomeViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        
+        let newIncomeText = incomeTextField.text
+        let newIncomeCategoryText = incomeCategoryTextField.text
+        if newIncomeText != "" && newIncomeCategoryText != ""{
+            myIncome.category = newIncomeCategoryText ?? ""
+            myIncome.amount = newIncomeText ?? ""
+            myIncome.date = NSDate(timeIntervalSinceNow: 0)
+            
+            try! realm.write {
+                realm.add(myIncome)
+            }
+            delegate?.reloadTableView()
+        }
         dismiss(animated: true, completion: nil)
         return true
     }
