@@ -14,6 +14,8 @@ class addExpenceViewController: UIViewController {
     weak var delegate : updateExpanceTableViewDelegate?
     
     let expenseTextField = UITextField()
+    
+    
     let addExpenseButton = UIButton()
     
     let newCategory = ExpenseСategory()

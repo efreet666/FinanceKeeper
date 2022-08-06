@@ -76,7 +76,7 @@ extension IncomeViewController: UITableViewDataSource, UITableViewDelegate {
             let myIncomes = realm.objects(NewIncome.self)
             let currentIncome = myIncomes[indexPath.row - 1]
             cell.moneyLabelOutlet.text =  "\(currentIncome.amount) Р"
-            
+            cell.catergoryLabelOutlet.text = "\(currentIncome.category)"
             let formatter = DateFormatter()
             formatter.dateFormat = "d MMM yyyy"
             cell.dataLabelOutlet.text = formatter.string(from: currentIncome.date as Date)

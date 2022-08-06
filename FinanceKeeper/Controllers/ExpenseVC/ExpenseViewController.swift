@@ -90,6 +90,11 @@ extension ExpenseViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
+            let myExpenseCategory = realm.objects(ExpenseСategory.self)
+            let currentExpenseCategory = myExpenseCategory[indexPath.row]
+            try! realm.write {
+                realm.delete(currentExpenseCategory)
+            }
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.reloadData()
         }
