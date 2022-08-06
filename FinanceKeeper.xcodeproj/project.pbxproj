@@ -20,6 +20,8 @@
 		F557F88728985875002C6653 /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F557F88528985875002C6653 /* HeaderTableViewCell.xib */; };
 		F557F88B289867AE002C6653 /* ExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F557F88A289867AE002C6653 /* ExpenseViewController.swift */; };
 		F557F88D2898710A002C6653 /* addExpenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F557F88C2898710A002C6653 /* addExpenceViewController.swift */; };
+		F5F20AFF289E798000C616EC /* ExpenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F20AFD289E798000C616EC /* ExpenseTableViewCell.swift */; };
+		F5F20B00289E798000C616EC /* ExpenseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5F20AFE289E798000C616EC /* ExpenseTableViewCell.xib */; };
 		F5FAD451289820D700392D6E /* IncomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAD44F289820D700392D6E /* IncomeTableViewCell.swift */; };
 		F5FAD452289820D700392D6E /* IncomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5FAD450289820D700392D6E /* IncomeTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -42,6 +44,8 @@
 		F557F88528985875002C6653 /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
 		F557F88A289867AE002C6653 /* ExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewController.swift; sourceTree = "<group>"; };
 		F557F88C2898710A002C6653 /* addExpenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addExpenceViewController.swift; sourceTree = "<group>"; };
+		F5F20AFD289E798000C616EC /* ExpenseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTableViewCell.swift; sourceTree = "<group>"; };
+		F5F20AFE289E798000C616EC /* ExpenseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpenseTableViewCell.xib; sourceTree = "<group>"; };
 		F5FAD44F289820D700392D6E /* IncomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeTableViewCell.swift; sourceTree = "<group>"; };
 		F5FAD450289820D700392D6E /* IncomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomeTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -161,11 +165,21 @@
 			path = ExpenseVC;
 			sourceTree = "<group>";
 		};
+		F5F20B01289E798D00C616EC /* ExpenseCell */ = {
+			isa = PBXGroup;
+			children = (
+				F5F20AFD289E798000C616EC /* ExpenseTableViewCell.swift */,
+				F5F20AFE289E798000C616EC /* ExpenseTableViewCell.xib */,
+			);
+			path = ExpenseCell;
+			sourceTree = "<group>";
+		};
 		F5FAD44E2898201A00392D6E /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				F557F8832898585A002C6653 /* Header cell */,
 				F5FAD453289820DF00392D6E /* IncomeCell */,
+				F5F20B01289E798D00C616EC /* ExpenseCell */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -241,6 +255,7 @@
 			files = (
 				F54F6F3B288B3D00003673C0 /* LaunchScreen.storyboard in Resources */,
 				F54F6F38288B3D00003673C0 /* Assets.xcassets in Resources */,
+				F5F20B00289E798000C616EC /* ExpenseTableViewCell.xib in Resources */,
 				F5FAD452289820D700392D6E /* IncomeTableViewCell.xib in Resources */,
 				F557F88728985875002C6653 /* HeaderTableViewCell.xib in Resources */,
 				F54F6F36288B3CFB003673C0 /* Main.storyboard in Resources */,
@@ -296,6 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5F20AFF289E798000C616EC /* ExpenseTableViewCell.swift in Sources */,
 				F54F6F33288B3CFB003673C0 /* IncomeViewController.swift in Sources */,
 				F54F6F45288C6096003673C0 /* IncomeModel.swift in Sources */,
 				F5FAD451289820D700392D6E /* IncomeTableViewCell.swift in Sources */,

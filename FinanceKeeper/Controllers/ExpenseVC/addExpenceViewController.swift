@@ -13,8 +13,8 @@ class addExpenceViewController: UIViewController {
     
     weak var delegate : updateExpanceTableViewDelegate?
     
-    let incomeTextField = UITextField()
-    let addIncomeButton = UIButton()
+    let expenseTextField = UITextField()
+    let addExpenseButton = UIButton()
     
     let newCategory = ExpenseСategory()
     let realm = try! Realm()
@@ -24,7 +24,7 @@ class addExpenceViewController: UIViewController {
         setupModalView()
         setupTextField()
         setupButton()
-        incomeTextField.becomeFirstResponder()
+        expenseTextField.becomeFirstResponder()
     }
     
     //MARK: - Modal View
@@ -32,7 +32,7 @@ class addExpenceViewController: UIViewController {
     func setupModalView(){
         view.backgroundColor = UIColor.black
         view.isOpaque = false
-        let newView = UIView(frame: CGRect(x: 0, y: 300, width: self.view.frame.width, height: 650))
+        let newView = UIView(frame: CGRect(x: 0, y: 280, width: self.view.frame.width, height: 670))
         newView.backgroundColor = .systemBackground
         newView.layer.cornerRadius = 20
         
@@ -47,46 +47,46 @@ class addExpenceViewController: UIViewController {
     //MARK: - TextField
     
     func setupTextField() {
-        incomeTextField.backgroundColor = .white
-        incomeTextField.textColor = .black
-        incomeTextField.placeholder = "Наименование"
-        incomeTextField.tintColor = .gray
-        incomeTextField.font = UIFont.systemFont(ofSize: 15)
-        incomeTextField.borderStyle = UITextField.BorderStyle.roundedRect
-        incomeTextField.autocorrectionType = UITextAutocorrectionType.no
-        incomeTextField.keyboardType = UIKeyboardType.numberPad
-        incomeTextField.returnKeyType = UIReturnKeyType.done
-        incomeTextField.clearButtonMode = UITextField.ViewMode.whileEditing
-        incomeTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        self.view.addSubview(incomeTextField)
+        expenseTextField.backgroundColor = .white
+        expenseTextField.textColor = .black
+        expenseTextField.placeholder = "Наименование"
+        expenseTextField.tintColor = .gray
+        expenseTextField.font = UIFont.systemFont(ofSize: 15)
+        expenseTextField.borderStyle = UITextField.BorderStyle.roundedRect
+        expenseTextField.autocorrectionType = UITextAutocorrectionType.no
+        expenseTextField.returnKeyType = UIReturnKeyType.done
+        expenseTextField.clearButtonMode = UITextField.ViewMode.whileEditing
+        expenseTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        self.view.addSubview(expenseTextField)
         
-        incomeTextField.snp.makeConstraints { make in
+        expenseTextField.snp.makeConstraints { make in
             make.trailing.leading.equalToSuperview().inset(15)
-            make.bottom.equalToSuperview().inset(400)
+            make.bottom.equalToSuperview().inset(420)
             make.height.equalTo(45)
         }
     }
     
     //MARK: - Add button
     func setupButton() {
-        addIncomeButton.setTitle("Добавить категорию расходов", for: .normal)
-        addIncomeButton.setTitleColor(.white, for: .normal)
-        addIncomeButton.setTitleColor(.gray, for: .selected)
-        addIncomeButton.backgroundColor = .blue
-        addIncomeButton.layer.cornerRadius = 12
-        self.view.addSubview(addIncomeButton)
-        addIncomeButton.snp.makeConstraints { make in
+        addExpenseButton.setTitle("Добавить категорию расходов", for: .normal)
+        addExpenseButton.setTitleColor(.white, for: .normal)
+        addExpenseButton.setTitleColor(.gray, for: .selected)
+        addExpenseButton.backgroundColor = .blue
+        addExpenseButton.layer.cornerRadius = 12
+        self.view.addSubview(addExpenseButton)
+        
+        addExpenseButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(15)
-            make.top.equalTo(incomeTextField).inset(70)
+            make.top.equalTo(expenseTextField).inset(70)
             make.height.equalTo(45)
         }
-        addIncomeButton.addTarget(self, action: #selector(addNewIncome(button:)), for: .touchUpInside)
+        addExpenseButton.addTarget(self, action: #selector(addNewExpense(button:)), for: .touchUpInside)
     }
     
     //MARK: - Add new income to Realm
     
-    @objc func addNewIncome(button: UIButton) {
-        let newCategoryText = incomeTextField.text
+    @objc func addNewExpense(button: UIButton) {
+        let newCategoryText = expenseTextField.text
         if newCategoryText != "" {
             newCategory.category = newCategoryText ?? ""
             

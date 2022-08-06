@@ -79,12 +79,12 @@ class AddIncomeViewController: UIViewController {
             make.top.equalTo(incomeTextField).inset(70)
             make.height.equalTo(45)
         }
-        addIncomeButton.addTarget(self, action: #selector(addNewIncome(button:)), for: .touchUpInside)
+        addIncomeButton.addTarget(self, action: #selector(addNewExpense(button:)), for: .touchUpInside)
     }
     
     //MARK: - Add new income to Realm
     
-    @objc func addNewIncome(button: UIButton) {
+    @objc func addNewExpense(button: UIButton) {
         let newIncomeText = incomeTextField.text
         if newIncomeText != "" {
             myIncome.amount = newIncomeText ?? ""

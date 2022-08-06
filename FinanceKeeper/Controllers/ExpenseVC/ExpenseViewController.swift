@@ -21,7 +21,9 @@ class ExpenseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.categoryTableView.dataSource = self
+        self.categoryTableView.delegate = self
+        self.categoryTableView.register(UINib(nibName: "ExpenseTableViewCell", bundle: nil), forCellReuseIdentifier: "ExpenseTableViewCell")
         setupView()
     }
     
@@ -59,26 +61,20 @@ class ExpenseViewController: UIViewController {
 extension ExpenseViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let myIncomes = realm.objects(NewIncome.self)
-        print(myIncomes)
-        return (myIncomes.count) + 1
+        let myExpenseCategory = realm.objects(ExpenseСategory.self)
+        print(myExpenseCategory)
+        print(myExpenseCategory.count)
+        return (myExpenseCategory.count)
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-            // Header cell
-            
-            let myIncomes = realm.objects(NewIncome.self)
-            let incomesName = myIncomes
-            var total: Int = 0
-            for income in incomesName {
-                print(income.amount)
-                total += Int(income.amount) ?? 0
-            }
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderTableViewCell", for: indexPath) as! HeaderTableViewCell
-            cell.totalBalanceOutlet.text = "\(total) Р"
-            return cell
+        let myExpenseCategory = realm.objects(ExpenseСategory.self)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseTableViewCell", for: indexPath) as! ExpenseTableViewCell
+        cell.categoryLabelOutlet.text = myExpenseCategory[indexPath.row].category
+        return cell
         
 
     }
@@ -93,12 +89,7 @@ extension ExpenseViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - Deleting
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let myIncomes = realm.objects(NewIncome.self)
             
-            let currentIncome = myIncomes[indexPath.row - 1]
-            try! realm.write {
-                realm.delete(currentIncome)
-            }
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.reloadData()
         }

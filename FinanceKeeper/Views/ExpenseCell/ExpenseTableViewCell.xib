@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpenseTableViewCell" rowHeight="52" id="KGk-i7-Jjw" customClass="ExpenseTableViewCell" customModule="FinanceKeeper" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRf-i6-GXm">
+                        <rect key="frame" x="15" y="15" width="258" height="22"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a0v-Nh-vEL">
+                        <rect key="frame" x="293" y="12" width="12" height="28.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="a0v-Nh-vEL" secondAttribute="height" multiplier="3:8" id="cJQ-RH-Ehm"/>
+                        </constraints>
+                        <imageReference key="image" image="chevron.right" catalog="system" renderingMode="hierarchical-single">
+                            <hierarchicalColors>
+                                <color systemColor="labelColor"/>
+                                <color systemColor="secondaryLabelColor"/>
+                                <color systemColor="tertiaryLabelColor"/>
+                            </hierarchicalColors>
+                        </imageReference>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="a0v-Nh-vEL" secondAttribute="bottom" constant="10" id="687-ze-Xsd"/>
+                    <constraint firstItem="a0v-Nh-vEL" firstAttribute="leading" secondItem="yRf-i6-GXm" secondAttribute="trailing" constant="20" id="ONu-hJ-VDw"/>
+                    <constraint firstAttribute="trailing" secondItem="a0v-Nh-vEL" secondAttribute="trailing" constant="15" id="SEk-ff-lhA"/>
+                    <constraint firstItem="a0v-Nh-vEL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="iV7-ga-iiL"/>
+                    <constraint firstItem="yRf-i6-GXm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="liu-xH-HBc"/>
+                    <constraint firstAttribute="bottom" secondItem="yRf-i6-GXm" secondAttribute="bottom" constant="15" id="mWW-Qw-m1I"/>
+                    <constraint firstItem="yRf-i6-GXm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="t1V-hP-ntE"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="categoryLabelOutlet" destination="yRf-i6-GXm" id="8kC-dO-uVt"/>
+            </connections>
+            <point key="canvasLocation" x="152.17391304347828" y="63.616071428571423"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
