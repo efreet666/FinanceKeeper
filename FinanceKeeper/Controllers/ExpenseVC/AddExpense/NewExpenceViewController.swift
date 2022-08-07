@@ -16,7 +16,7 @@ protocol updateExpenceTableViewDelegate: NewExpenceViewController {
 class NewExpenceViewController: UIViewController {
 
     var currentCategory = ""
-    let realm = try! Realm()
+    
     
     let newExpenseTableView = UITableView()
     let addNewCategoryButton = UIButton()
@@ -122,7 +122,9 @@ extension NewExpenceViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
-            let myNewExpense = realm.objects(NewExpenses.self)
+            let predicate = NSPredicate(format: "category BEGINSWITH [c]%@", currentCategory)
+            let realm = try! Realm()
+            let myNewExpense = realm.objects(NewExpenses.self).filter(predicate)
             let currentExpense = myNewExpense[indexPath.row]
             try! realm.write {
                 realm.delete(currentExpense)

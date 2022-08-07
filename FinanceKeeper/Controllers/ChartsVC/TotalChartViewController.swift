@@ -1,5 +1,5 @@
 //
-//  ExpenseGraphViewController.swift
+//  TotalChartViewController.swift
 //  FinanceKeeper
 //
 //  Created by Влад Бокин on 07.08.2022.
@@ -10,23 +10,17 @@ import Charts
 import SnapKit
 import RealmSwift
 
-class ExpenseGraphViewController: UIViewController, ChartViewDelegate {
+class TotalChartViewController: UIViewController, ChartViewDelegate {
 
-    var currentCategory = ""
-    
-    
     var lineChart = LineChartView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = .black
-        
         lineChart.delegate = self
-        self.title = "График расходов"
     }
     
-    override func viewDidLayoutSubviews() {
+    override func viewWillAppear(_ animated: Bool) {
         setupChartData()
         setupView()
     }
@@ -41,16 +35,15 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate {
             
         }
     }
-
+    
     func setupChartData() {
-        let predicate = NSPredicate(format: "category BEGINSWITH [c]%@", currentCategory)
+        
         let realm = try! Realm()
-        let myResult = realm.objects(NewExpenses.self).filter(predicate)
+        let myResult = realm.objects(NewExpenses.self)
         
         var entries = [BarChartDataEntry]()
         var dayTotalAmount: Double = 0
         
-        //MARK: - Total expense per day
         for i in 0..<myResult.count {
             
             let formatter = DateFormatter()
@@ -77,7 +70,8 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate {
                         
         }
         
-        let set = LineChartDataSet(entries: entries, label: "\(currentCategory)")
+        
+        let set = LineChartDataSet(entries: entries, label: "Что-то нужно")
         
 
         set.colors = ChartColorTemplates.pastel()
@@ -86,6 +80,7 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate {
         
         lineChart.data = data
     }
-   
+
+  
 
 }

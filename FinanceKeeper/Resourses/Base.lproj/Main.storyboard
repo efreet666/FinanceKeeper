@@ -58,11 +58,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" systemColor="systemRedColor"/>
-                        <color key="selectedImageTintColor" systemColor="systemBlueColor"/>
+                        <color key="selectedImageTintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="CxF-sV-2dR" kind="relationship" relationship="viewControllers" id="dc4-KX-y0z"/>
-                        <segue destination="4B4-gG-Izi" kind="relationship" relationship="viewControllers" id="DMX-bN-Yzk"/>
+                        <segue destination="n6W-dF-von" kind="relationship" relationship="viewControllers" id="DMX-bN-Yzk"/>
                         <segue destination="m8Z-EZ-Ctj" kind="relationship" relationship="viewControllers" id="gkg-PV-1fU"/>
                     </connections>
                 </tabBarController>
@@ -140,21 +140,21 @@
             </objects>
             <point key="canvasLocation" x="955.07246376811599" y="70.982142857142847"/>
         </scene>
-        <!--График-->
+        <!--График расходов и доходов-->
         <scene sceneID="YMb-HQ-gch">
             <objects>
-                <viewController id="4B4-gG-Izi" sceneMemberID="viewController">
+                <viewController id="4B4-gG-Izi" customClass="TotalChartViewController" customModule="FinanceKeeper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pdf-eH-4bR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="fce-2C-zIn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="График" image="waveform.path.ecg" catalog="system" id="Dxg-5S-5ca"/>
+                    <navigationItem key="navigationItem" title="График расходов и доходов" id="lXg-qa-pED"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aVR-yK-P0j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="955" y="807"/>
+            <point key="canvasLocation" x="1863.7681159420292" y="806.91964285714278"/>
         </scene>
         <!--Расходы-->
         <scene sceneID="ZEY-m0-NWa">
@@ -175,6 +175,25 @@
             </objects>
             <point key="canvasLocation" x="953.62318840579712" y="-640.17857142857144"/>
         </scene>
+        <!--График-->
+        <scene sceneID="hpj-ok-u2d">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="n6W-dF-von" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="График" image="waveform.path.ecg" catalog="system" id="Dxg-5S-5ca"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rRd-GK-rnK">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4B4-gG-Izi" kind="relationship" relationship="rootViewController" id="U93-Xb-0xO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="36c-FW-Tkj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="953.62318840579712" y="806.91964285714278"/>
+        </scene>
     </scenes>
     <resources>
         <image name="tray.and.arrow.down" catalog="system" width="128" height="109"/>
@@ -182,9 +201,6 @@
         <image name="waveform.path.ecg" catalog="system" width="128" height="124"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
