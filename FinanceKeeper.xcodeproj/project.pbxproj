@@ -28,6 +28,7 @@
 		F5FC028F289ECE790092C015 /* AddNewExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FC028E289ECE780092C015 /* AddNewExpenseViewController.swift */; };
 		F5FC0293289ED1890092C015 /* NewExpenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FC0291289ED1890092C015 /* NewExpenseTableViewCell.swift */; };
 		F5FC0294289ED1890092C015 /* NewExpenseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5FC0292289ED1890092C015 /* NewExpenseTableViewCell.xib */; };
+		F5FC0297289FBFD50092C015 /* ExpenseGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FC0296289FBFD50092C015 /* ExpenseGraphViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		F5FC028E289ECE780092C015 /* AddNewExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExpenseViewController.swift; sourceTree = "<group>"; };
 		F5FC0291289ED1890092C015 /* NewExpenseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExpenseTableViewCell.swift; sourceTree = "<group>"; };
 		F5FC0292289ED1890092C015 /* NewExpenseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewExpenseTableViewCell.xib; sourceTree = "<group>"; };
+		F5FC0296289FBFD50092C015 /* ExpenseGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseGraphViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 		F557F88928986789002C6653 /* ExpenseVC */ = {
 			isa = PBXGroup;
 			children = (
+				F5FC0295289FBFAE0092C015 /* ExpenseGraphs */,
 				F5F20B03289EA38800C616EC /* AddExpense */,
 				F5F20B02289EA37A00C616EC /* Category */,
 			);
@@ -227,6 +230,14 @@
 				F5FC0292289ED1890092C015 /* NewExpenseTableViewCell.xib */,
 			);
 			path = ExpenseCell;
+			sourceTree = "<group>";
+		};
+		F5FC0295289FBFAE0092C015 /* ExpenseGraphs */ = {
+			isa = PBXGroup;
+			children = (
+				F5FC0296289FBFD50092C015 /* ExpenseGraphViewController.swift */,
+			);
+			path = ExpenseGraphs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -348,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5FC0297289FBFD50092C015 /* ExpenseGraphViewController.swift in Sources */,
 				F5F20AFF289E798000C616EC /* ExpenseTableViewCell.swift in Sources */,
 				F54F6F33288B3CFB003673C0 /* IncomeViewController.swift in Sources */,
 				F5FC028F289ECE790092C015 /* AddNewExpenseViewController.swift in Sources */,

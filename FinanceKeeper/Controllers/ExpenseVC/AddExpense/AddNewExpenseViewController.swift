@@ -23,7 +23,7 @@ class AddNewExpenseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        expenseTextField.becomeFirstResponder()
         setupViews()
     }
     

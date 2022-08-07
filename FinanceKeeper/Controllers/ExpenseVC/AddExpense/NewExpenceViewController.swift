@@ -20,7 +20,7 @@ class NewExpenceViewController: UIViewController {
     
     let newExpenseTableView = UITableView()
     let addNewCategoryButton = UIButton()
-    let openGraphExpenseVutton = UIButton()
+    let openGraphExpenseButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +28,7 @@ class NewExpenceViewController: UIViewController {
         self.newExpenseTableView.delegate = self
         self.newExpenseTableView.register(UINib(nibName: "NewExpenseTableViewCell", bundle: nil), forCellReuseIdentifier: "NewExpenseTableViewCell")
         setupView()
+        self.view.backgroundColor = .black
     }
     override func viewWillAppear(_ animated: Bool) {
         print(currentCategory)
@@ -37,7 +38,8 @@ class NewExpenceViewController: UIViewController {
         
         view.addSubview(newExpenseTableView)
         newExpenseTableView.snp.makeConstraints { make in
-            make.top.trailing.leading.equalToSuperview()
+            make.trailing.leading.equalToSuperview()
+            make.top.equalToSuperview().inset(170)
             make.bottom.equalToSuperview().inset(100)
         }
         
@@ -52,6 +54,17 @@ class NewExpenceViewController: UIViewController {
             make.trailing.equalToSuperview().inset(30)
         }
         
+        openGraphExpenseButton.setTitle("График платежей", for: .normal)
+        openGraphExpenseButton.backgroundColor = .blue
+        openGraphExpenseButton.layer.cornerRadius = 15
+        openGraphExpenseButton.addTarget(self, action: #selector(openGraphExpenseVC), for: .touchUpInside)
+        view.addSubview(openGraphExpenseButton)
+        openGraphExpenseButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(100)
+            make.height.equalTo(48)
+            make.trailing.leading.equalToSuperview().inset(20)
+        }
+        
         
     }
     
@@ -63,7 +76,10 @@ class NewExpenceViewController: UIViewController {
         modalViewController.delegate = self
         present(modalViewController, animated: true, completion: nil)
     }
-
+    @objc func openGraphExpenseVC() {
+        let expenseGraphsVC = ExpenseGraphViewController()
+        self.navigationController?.pushViewController(expenseGraphsVC, animated: true)
+    }
 }
 extension NewExpenceViewController: UITableViewDelegate, UITableViewDataSource {
     

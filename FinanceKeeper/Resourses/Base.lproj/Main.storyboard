@@ -96,10 +96,30 @@
                         <viewLayoutGuide key="safeArea" id="yvb-c4-cSm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="r9c-of-FeV"/>
+                    <connections>
+                        <segue destination="d2Z-gQ-xzY" kind="show" identifier="showExpenseGraphVC" id="pTb-ym-b5C"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AKn-69-fAz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2741" y="-640"/>
+        </scene>
+        <!--Expense Graph View Controller-->
+        <scene sceneID="rOz-sv-9AE">
+            <objects>
+                <viewController id="d2Z-gQ-xzY" customClass="ExpenseGraphViewController" customModule="FinanceKeeper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wdw-wI-u2m">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="NTc-55-HCo"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="UV7-d6-zHy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nFB-LG-yas" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3630" y="-640"/>
         </scene>
         <!--Доходы-->
         <scene sceneID="Eoi-Gj-gjX">
