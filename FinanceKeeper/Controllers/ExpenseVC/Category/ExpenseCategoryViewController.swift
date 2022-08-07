@@ -14,6 +14,7 @@ protocol updateExpanceTableViewDelegate: ExpenseViewController {
 
 class ExpenseViewController: UIViewController {
 
+    
     let realm = try! Realm()
     
     let categoryTableView = UITableView()
@@ -25,6 +26,7 @@ class ExpenseViewController: UIViewController {
         self.categoryTableView.delegate = self
         self.categoryTableView.register(UINib(nibName: "ExpenseTableViewCell", bundle: nil), forCellReuseIdentifier: "ExpenseTableViewCell")
         setupView()
+        
     }
     
     func setupView() {
@@ -102,6 +104,9 @@ extension ExpenseViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let expenceViewController = NewExpenceViewController()
+        let myExpenseCategory = realm.objects(ExpenseСategory.self)
+        
+        expenceViewController.currentCategory = "\(myExpenseCategory[indexPath.row].category)"
         self.navigationController?.pushViewController(expenceViewController, animated: true)
     }
     

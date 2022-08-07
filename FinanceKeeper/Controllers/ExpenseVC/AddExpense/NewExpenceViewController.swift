@@ -8,22 +8,31 @@
 import UIKit
 import RealmSwift
 
+protocol updateExpenceTableViewDelegate: NewExpenceViewController {
+    func reloadTableView()
+    
+}
+
 class NewExpenceViewController: UIViewController {
 
+    var currentCategory = ""
     let realm = try! Realm()
     
     let newExpenseTableView = UITableView()
     let addNewCategoryButton = UIButton()
+    let openGraphExpenseVutton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.newExpenseTableView.dataSource = self
         self.newExpenseTableView.delegate = self
         self.newExpenseTableView.register(UINib(nibName: "NewExpenseTableViewCell", bundle: nil), forCellReuseIdentifier: "NewExpenseTableViewCell")
-        
         setupView()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        print(currentCategory)
+        self.navigationController?.title = currentCategory
+    }
     private func setupView() {
         
         view.addSubview(newExpenseTableView)
@@ -32,15 +41,15 @@ class NewExpenceViewController: UIViewController {
             make.bottom.equalToSuperview().inset(100)
         }
         
-        addNewCategoryButton.setTitle("Добавить расход", for: .normal)
+        addNewCategoryButton.setTitle("+", for: .normal)
         addNewCategoryButton.backgroundColor = .blue
-        addNewCategoryButton.layer.cornerRadius = 15
+        addNewCategoryButton.layer.cornerRadius = 32
         addNewCategoryButton.addTarget(self, action: #selector(openAddSubview), for: .touchUpInside)
         view.addSubview(addNewCategoryButton)
         addNewCategoryButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(150)
-            make.height.equalTo(48)
-            make.trailing.leading.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview().inset(120)
+            make.height.width.equalTo(65)
+            make.trailing.equalToSuperview().inset(30)
         }
         
         
@@ -50,30 +59,35 @@ class NewExpenceViewController: UIViewController {
         let modalViewController = AddNewExpenseViewController()
         modalViewController.modalPresentationStyle = .popover
         modalViewController.modalTransitionStyle = UIModalTransitionStyle.coverVertical
-        //modalViewController.delegate = self
+        modalViewController.newExpenseCurrentCategory = currentCategory
+        modalViewController.delegate = self
         present(modalViewController, animated: true, completion: nil)
     }
-
 
 }
 extension NewExpenceViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let myExpenseCategory = realm.objects(NewExpenses.self)
-        print(myExpenseCategory)
-        print(myExpenseCategory.count)
-        return (myExpenseCategory.count)
+        let predicate = NSPredicate(format: "category BEGINSWITH [c]%@", currentCategory)
+        let realm = try! Realm()
+        let myResult = realm.objects(NewExpenses.self).filter(predicate)
+        return (myResult.count)
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let myNewExpense = realm.objects(NewExpenses.self)
+        let predicate = NSPredicate(format: "category BEGINSWITH [c]%@", currentCategory)
+        let realm = try! Realm()
+        let myNewExpense = realm.objects(NewExpenses.self).filter(predicate)
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewExpenseTableViewCell", for: indexPath) as! NewExpenseTableViewCell
-        cell.dateLabelOutlet.text = "\(myNewExpense[indexPath.row].date)"
-        cell.expenseLabelOutlet.text = myNewExpense[indexPath.row].amount
+        
+        cell.expenseLabelOutlet.text = myNewExpense[indexPath.row].amount + " Р"
         cell.nameLabelOutlet.text = myNewExpense[indexPath.row].name
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d MMM yyyy"
+        cell.dateLabelOutlet.text = formatter.string(from: myNewExpense[indexPath.row].date as Date)
         return cell
         
 
@@ -102,3 +116,11 @@ extension NewExpenceViewController: UITableViewDelegate, UITableViewDataSource {
 
     
 }
+
+extension NewExpenceViewController: updateExpenceTableViewDelegate {
+    func reloadTableView() {
+        newExpenseTableView.reloadData()
+    }
+    
+}
+

@@ -9,11 +9,17 @@ import UIKit
 import RealmSwift
 
 class AddNewExpenseViewController: UIViewController {
+    
     let expenseTextField = UITextField()
+    let expenseNameTextField = UITextField()
     let addExpenseButton = UIButton()
+    
+    var newExpenseCurrentCategory = ""
     
     let myNewExpense = NewExpenses()
     let realm = try! Realm()
+    
+    weak var delegate : updateExpenceTableViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,26 +57,50 @@ class AddNewExpenseViewController: UIViewController {
         expenseTextField.font = UIFont.systemFont(ofSize: 15)
         expenseTextField.borderStyle = UITextField.BorderStyle.roundedRect
         expenseTextField.autocorrectionType = UITextAutocorrectionType.no
+        expenseTextField.keyboardType = UIKeyboardType.numberPad
         expenseTextField.returnKeyType = UIReturnKeyType.done
         expenseTextField.clearButtonMode = UITextField.ViewMode.whileEditing
         expenseTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        //expenseTextField.delegate = self
         expenseTextField.attributedPlaceholder = NSAttributedString(
-            string: "Наименование",
+            string: "Сумма",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
         )
         self.view.addSubview(expenseTextField)
         
         expenseTextField.snp.makeConstraints { make in
             make.trailing.leading.equalToSuperview().inset(15)
-            make.bottom.equalToSuperview().inset(420)
+            make.bottom.equalToSuperview().inset(440)
+            make.height.equalTo(45)
+        }
+        
+        
+        expenseNameTextField.backgroundColor = .white
+        expenseNameTextField.textColor = .black
+        expenseNameTextField.tintColor = .blue
+        expenseNameTextField.font = UIFont.systemFont(ofSize: 15)
+        expenseNameTextField.borderStyle = UITextField.BorderStyle.roundedRect
+        expenseNameTextField.autocorrectionType = UITextAutocorrectionType.no
+        expenseNameTextField.keyboardType = UIKeyboardType.alphabet
+        expenseNameTextField.returnKeyType = UIReturnKeyType.done
+        expenseNameTextField.clearButtonMode = UITextField.ViewMode.whileEditing
+        expenseNameTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        expenseNameTextField.delegate = self
+        expenseNameTextField.attributedPlaceholder = NSAttributedString(
+            string: "Наименование",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+        )
+        self.view.addSubview(expenseNameTextField)
+        
+        expenseNameTextField.snp.makeConstraints { make in
+            make.trailing.leading.equalToSuperview().inset(15)
+            make.bottom.equalToSuperview().inset(380)
             make.height.equalTo(45)
         }
     }
     
     //MARK: - Add button
     func setupButton() {
-        addExpenseButton.setTitle("Добавить категорию расходов", for: .normal)
+        addExpenseButton.setTitle("Добавить расход", for: .normal)
         addExpenseButton.setTitleColor(.white, for: .normal)
         addExpenseButton.setTitleColor(.gray, for: .selected)
         addExpenseButton.backgroundColor = .blue
@@ -79,21 +109,25 @@ class AddNewExpenseViewController: UIViewController {
         
         addExpenseButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(15)
-            make.top.equalTo(expenseTextField).inset(70)
+            make.top.equalTo(expenseNameTextField).inset(70)
             make.height.equalTo(45)
         }
         addExpenseButton.addTarget(self, action: #selector(addNewExpense(button:)), for: .touchUpInside)
     }
 
     @objc func addNewExpense(button: UIButton) {
-        let newExpenseText = expenseTextField.text
-        if newExpenseText != "" {
-            myNewExpense.amount = newExpenseText ?? ""
+        let newExpenseAmountText = expenseTextField.text
+        let expenseNameText = expenseNameTextField.text
+        if newExpenseAmountText != "" && expenseNameText != "" {
+            myNewExpense.category = newExpenseCurrentCategory
+            myNewExpense.amount = newExpenseAmountText ?? ""
+            myNewExpense.name = expenseNameText ?? ""
             
             try! realm.write {
                 realm.add(myNewExpense)
             }
-            //delegate?.reloadTableView()
+            delegate?.reloadTableView()
+            delegate?.reloadTableView()
             
             dismiss(animated: true, completion: nil)
         }
@@ -109,15 +143,18 @@ class AddNewExpenseViewController: UIViewController {
 extension AddNewExpenseViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        let newCategoryText = expenseTextField.text
-        if newCategoryText != "" {
-//            newCategory.category = newCategoryText ?? ""
-//            
-//            try! realm.write {
-//                realm.add(newCategory)
-//            }
-//            delegate?.reloadTableView()
-//            
+        let newExpenseAmountText = expenseTextField.text
+        let expenseNameText = expenseNameTextField.text
+        if newExpenseAmountText != "" && expenseNameText != "" {
+            myNewExpense.category = "-"
+            myNewExpense.amount = newExpenseAmountText ?? ""
+            myNewExpense.name = expenseNameText ?? ""
+            
+            try! realm.write {
+                realm.add(myNewExpense)
+            }
+            delegate?.reloadTableView()
+            
             dismiss(animated: true, completion: nil)
         }
         dismiss(animated: true, completion: nil)
