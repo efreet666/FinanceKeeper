@@ -122,11 +122,11 @@ class AddNewExpenseViewController: UIViewController {
             myNewExpense.category = newExpenseCurrentCategory
             myNewExpense.amount = newExpenseAmountText ?? ""
             myNewExpense.name = expenseNameText ?? ""
+            myNewExpense.date = NSDate(timeIntervalSinceNow: 187000)
             
             try! realm.write {
                 realm.add(myNewExpense)
             }
-            delegate?.reloadTableView()
             delegate?.reloadTableView()
             
             dismiss(animated: true, completion: nil)

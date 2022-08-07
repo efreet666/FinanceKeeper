@@ -29,6 +29,7 @@ class NewExpenceViewController: UIViewController {
         self.newExpenseTableView.register(UINib(nibName: "NewExpenseTableViewCell", bundle: nil), forCellReuseIdentifier: "NewExpenseTableViewCell")
         setupView()
         self.view.backgroundColor = .black
+        self.title = currentCategory
     }
     override func viewWillAppear(_ animated: Bool) {
         print(currentCategory)

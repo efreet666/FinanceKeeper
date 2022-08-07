@@ -35,9 +35,9 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate {
         view.addSubview(lineChart)
         
         lineChart.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(100)
+            make.top.equalToSuperview().inset(150)
             make.leading.equalToSuperview().inset(20)
-            make.width.height.equalTo(300)
+            make.width.height.equalTo(340)
             
         }
     }
@@ -57,16 +57,17 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate {
             let formatter = DateFormatter()
             formatter.dateFormat = "d"
             let dayOfMonth = formatter.string(from: myResult[i].date as Date)
-            print("\(Int(dayOfMonth)!) день месяца" )
+           
             
             
             if i != myResult.count - 1 {
-                
-                if myResult[i].date != myResult[i + 1].date {
+                print("\(myResult[i].date) и также \(myResult[i + 1].date)")
+                if formatter.string(from: myResult[i].date as Date) == formatter.string(from: myResult[i + 1].date as Date) {
                     
                     dayTotalAmount += Double(myResult[i].amount) ?? 0
                     print("\(dayTotalAmount) тот же день" )
                 } else {
+                    
                     dayTotalAmount += Double(myResult[i].amount) ?? 0
                     print("\(dayTotalAmount) Последняя трата сегодня" )
                     entries.append(BarChartDataEntry(x: Double(dayOfMonth) ?? 0 , y:  dayTotalAmount))
@@ -81,7 +82,7 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate {
         }
         
         
-        let set = LineChartDataSet(entries: entries)
+        let set = LineChartDataSet(entries: entries, label: "\(currentCategory)")
         
 
         set.colors = ChartColorTemplates.colorful()
