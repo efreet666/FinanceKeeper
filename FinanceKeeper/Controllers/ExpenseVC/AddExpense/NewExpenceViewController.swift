@@ -78,6 +78,7 @@ class NewExpenceViewController: UIViewController {
     }
     @objc func openGraphExpenseVC() {
         let expenseGraphsVC = ExpenseGraphViewController()
+        expenseGraphsVC.currentCategory = currentCategory
         self.navigationController?.pushViewController(expenseGraphsVC, animated: true)
     }
 }

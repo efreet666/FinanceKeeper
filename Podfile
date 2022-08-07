@@ -8,4 +8,5 @@ target 'FinanceKeeper' do
   # Pods for FinanceKeeper
 pod 'RealmSwift'
 pod 'SnapKit', '~> 5.0.0'
+pod 'Charts'
 end
