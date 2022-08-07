@@ -50,12 +50,34 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate {
         
         
         var entries = [BarChartDataEntry]()
+        var dayTotalAmount: Double = 0
         
         for i in 0..<myResult.count {
+            
             let formatter = DateFormatter()
             formatter.dateFormat = "d"
             let dayOfMonth = formatter.string(from: myResult[i].date as Date)
-            entries.append(BarChartDataEntry(x: Double(dayOfMonth) ?? 0 , y:  Double(myResult[i].amount) ?? 0))
+            print("\(Int(dayOfMonth)!) день месяца" )
+            
+            
+            if i != myResult.count - 1 {
+                
+                if myResult[i].date != myResult[i + 1].date {
+                    
+                    dayTotalAmount += Double(myResult[i].amount) ?? 0
+                    print("\(dayTotalAmount) тот же день" )
+                } else {
+                    dayTotalAmount += Double(myResult[i].amount) ?? 0
+                    print("\(dayTotalAmount) Последняя трата сегодня" )
+                    entries.append(BarChartDataEntry(x: Double(dayOfMonth) ?? 0 , y:  dayTotalAmount))
+                    dayTotalAmount = 0
+                }
+            } else {
+                dayTotalAmount += Double(myResult[i].amount) ?? 0
+                entries.append(BarChartDataEntry(x: Double(dayOfMonth) ?? 0 , y:  dayTotalAmount))
+                dayTotalAmount = 0
+            }
+                        
         }
         
         
@@ -63,6 +85,7 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate {
         
 
         set.colors = ChartColorTemplates.colorful()
+        set.mode = .linear
         let data = LineChartData(dataSet: set)
         
         lineChart.data = data
