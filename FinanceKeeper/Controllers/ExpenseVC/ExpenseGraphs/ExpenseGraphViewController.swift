@@ -23,6 +23,8 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate {
         self.view.backgroundColor = .black
         
         lineChart.delegate = self
+        
+        
         self.title = "График расходов"
     }
     
@@ -53,9 +55,11 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate {
         //MARK: - Total expense per day
         for i in 0..<myResult.count {
             
+            let graphableDatesAsDouble = myResult.map { $0.date.timeIntervalSince1970 }
+            
             let formatter = DateFormatter()
             formatter.dateFormat = "d"
-            let dayOfMonth = formatter.string(from: myResult[i].date as Date)
+            let dayOfMonth = graphableDatesAsDouble[i]
            
             if i != myResult.count - 1 {
                 
@@ -66,26 +70,41 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate {
                     
                     dayTotalAmount += Double(myResult[i].amount) ?? 0
                     
-                    entries.append(BarChartDataEntry(x: Double(dayOfMonth) ?? 0 , y:  dayTotalAmount))
+                    entries.append(BarChartDataEntry(x: dayOfMonth , y:  dayTotalAmount))
                     dayTotalAmount = 0
                 }
             } else {
                 dayTotalAmount += Double(myResult[i].amount) ?? 0
-                entries.append(BarChartDataEntry(x: Double(dayOfMonth) ?? 0 , y:  dayTotalAmount))
+                entries.append(BarChartDataEntry(x: dayOfMonth , y:  dayTotalAmount))
                 dayTotalAmount = 0
             }
                         
         }
         
+        
         let set = LineChartDataSet(entries: entries, label: "\(currentCategory)")
         
-
         set.colors = ChartColorTemplates.pastel()
         set.mode = .horizontalBezier
         let data = LineChartData(dataSet: set)
-        
+     
+        lineChart.xAxis.valueFormatter = XAxisNameFormater()
+        lineChart.xAxis.granularity = 1.0
         lineChart.data = data
     }
    
+
+}
+
+final class XAxisNameFormater: NSObject, AxisValueFormatter {
+
+    func stringForValue( _ value: Double, axis _: AxisBase?) -> String {
+
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "dd.MM"
+
+        return formatter.string(from: Date(timeIntervalSince1970: value))
+    }
 
 }

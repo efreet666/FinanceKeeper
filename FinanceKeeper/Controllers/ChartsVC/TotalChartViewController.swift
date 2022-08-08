@@ -58,9 +58,11 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
 
         for i in 0..<myResult.count {
 
+            let graphableDatesAsDouble = myResult.map { $0.date.timeIntervalSince1970 }
+            
             let formatter = DateFormatter()
             formatter.dateFormat = "d"
-            let dayOfMonth = formatter.string(from: myResult[i].date as Date)
+            let dayOfMonth = graphableDatesAsDouble[i]
 
             if i != myResult.count - 1 {
 
@@ -71,12 +73,12 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
 
                     dayTotalAmount += Double(myResult[i].amount) ?? 0
 
-                    entries.append(ChartDataEntry(x: Double(dayOfMonth) ?? 0, y: dayTotalAmount))
+                    entries.append(ChartDataEntry(x: dayOfMonth, y: dayTotalAmount))
                     dayTotalAmount = 0
                 }
             } else {
                 dayTotalAmount += Double(myResult[i].amount) ?? 0
-                entries.append(BarChartDataEntry(x: Double(dayOfMonth) ?? 0 , y:  dayTotalAmount))
+                entries.append(BarChartDataEntry(x: dayOfMonth, y:  dayTotalAmount))
                 dayTotalAmount = 0
             }
 
@@ -110,9 +112,12 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
         
         for i in 0..<myIncomeResult.count {
             
+            let graphableDatesAsDouble = myResult.map { $0.date.timeIntervalSince1970 }
+            
             let formatter = DateFormatter()
             formatter.dateFormat = "d"
-            let dayOfMonth = formatter.string(from: myIncomeResult[i].date as Date)
+            
+            let dayOfMonth = graphableDatesAsDouble[i]
            
             if i != myIncomeResult.count - 1 {
                 
@@ -123,12 +128,12 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
                     
                     dayTotalIncome += Double(myIncomeResult[i].amount) ?? 0
                     
-                    incomeEntries.append(BarChartDataEntry(x: Double(dayOfMonth) ?? 0 , y:  dayTotalIncome))
+                    incomeEntries.append(BarChartDataEntry(x: dayOfMonth, y:  dayTotalIncome))
                     dayTotalIncome = 0
                 }
             } else {
                 dayTotalIncome += Double(myIncomeResult[i].amount) ?? 0
-                incomeEntries.append(BarChartDataEntry(x: Double(dayOfMonth) ?? 0 , y:  dayTotalIncome))
+                incomeEntries.append(BarChartDataEntry(x: dayOfMonth, y:  dayTotalIncome))
                 dayTotalIncome = 0
             }
                         
@@ -140,13 +145,14 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
         IncomeSet.barBorderColor = .red
         IncomeSet.highlightColor = .white
 
-        //let a: [String] = Array["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", 11", "2"]
         let combinedData: CombinedChartData = CombinedChartData()
         combinedData.lineData = LineChartData(dataSet: set)
         combinedData.barData = BarChartData(dataSet: IncomeSet)
         
         data.setDrawValues(false)
         
+        lineChart.xAxis.valueFormatter = XAxisNameFormater()
+        lineChart.xAxis.granularity = 1.0
         lineChart.data = combinedData
     }
 
