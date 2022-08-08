@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		98D5CF26F57DF702A9EB1384 /* Pods_FinanceKeeper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F159D4D1E871A92E4C59204 /* Pods_FinanceKeeper.framework */; };
 		F51F3D3228A01CC2004EF2AC /* TotalChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51F3D3128A01CC2004EF2AC /* TotalChartViewController.swift */; };
+		F51F3D3528A12198004EF2AC /* CustomSegmentControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51F3D3428A12198004EF2AC /* CustomSegmentControll.swift */; };
 		F54F6F2F288B3CFB003673C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F6F2E288B3CFB003673C0 /* AppDelegate.swift */; };
 		F54F6F31288B3CFB003673C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F6F30288B3CFB003673C0 /* SceneDelegate.swift */; };
 		F54F6F33288B3CFB003673C0 /* IncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F6F32288B3CFB003673C0 /* IncomeViewController.swift */; };
@@ -37,6 +38,7 @@
 		5F159D4D1E871A92E4C59204 /* Pods_FinanceKeeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinanceKeeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB6140104350EB8206D142F1 /* Pods-FinanceKeeper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinanceKeeper.release.xcconfig"; path = "Target Support Files/Pods-FinanceKeeper/Pods-FinanceKeeper.release.xcconfig"; sourceTree = "<group>"; };
 		F51F3D3128A01CC2004EF2AC /* TotalChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalChartViewController.swift; sourceTree = "<group>"; };
+		F51F3D3428A12198004EF2AC /* CustomSegmentControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentControll.swift; sourceTree = "<group>"; };
 		F54F6F2B288B3CFB003673C0 /* FinanceKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinanceKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54F6F2E288B3CFB003673C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F54F6F30288B3CFB003673C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +99,14 @@
 				F51F3D3128A01CC2004EF2AC /* TotalChartViewController.swift */,
 			);
 			path = ChartsVC;
+			sourceTree = "<group>";
+		};
+		F51F3D3328A12177004EF2AC /* CustomSegmentControll */ = {
+			isa = PBXGroup;
+			children = (
+				F51F3D3428A12198004EF2AC /* CustomSegmentControll.swift */,
+			);
+			path = CustomSegmentControll;
 			sourceTree = "<group>";
 		};
 		F54F6F22288B3CFB003673C0 = {
@@ -217,6 +227,7 @@
 		F5FAD44E2898201A00392D6E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F51F3D3328A12177004EF2AC /* CustomSegmentControll */,
 				F557F8832898585A002C6653 /* Header cell */,
 				F5FAD453289820DF00392D6E /* IncomeCell */,
 				F5FC0290289ED1260092C015 /* ExpenseCell */,
@@ -371,6 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5FC0297289FBFD50092C015 /* ExpenseGraphViewController.swift in Sources */,
+				F51F3D3528A12198004EF2AC /* CustomSegmentControll.swift in Sources */,
 				F5F20AFF289E798000C616EC /* ExpenseTableViewCell.swift in Sources */,
 				F51F3D3228A01CC2004EF2AC /* TotalChartViewController.swift in Sources */,
 				F54F6F33288B3CFB003673C0 /* IncomeViewController.swift in Sources */,

@@ -11,27 +11,42 @@ import SnapKit
 import RealmSwift
 
 class TotalChartViewController: UIViewController, ChartViewDelegate {
+    
+    weak var interfaceSegmented: CustomSegmentedControl!{
+           didSet{
+               interfaceSegmented.setButtonTitles(buttonTitles: ["Week","Month","All"])
+               interfaceSegmented.selectorViewColor = .blue
+               interfaceSegmented.selectorTextColor = .blue
+           }
+       }
+       
+       override func viewDidLoad() {
+           super.viewDidLoad()
+           let codeSegmented = CustomSegmentedControl(frame: CGRect(x: 0, y: 100, width: self.view.frame.width, height: 50), buttonTitle: ["Week","Month","All"])
+           codeSegmented.backgroundColor = .clear
+           view.addSubview(codeSegmented)
+           
+           //
+           
+           lineChart.rightAxis.enabled = false
+           let yAxis = lineChart.leftAxis
+           yAxis.labelFont = .boldSystemFont(ofSize: 12)
+           yAxis.setLabelCount(6, force: false)
+           yAxis.labelTextColor = .white
+           yAxis.axisLineColor = .white
+           
+           lineChart.xAxis.labelPosition = .bottom
+           lineChart.xAxis.labelFont = .boldSystemFont(ofSize: 12)
+           lineChart.xAxis.setLabelCount(6, force: false)
+           lineChart.animate(yAxisDuration: 3, easingOption: .easeOutQuart)
+           lineChart.xAxis.granularity = 1
+           lineChart.delegate = self
+       }
 
+
+    // MARK: - Setup charts
     var lineChart = CombinedChartView()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        lineChart.rightAxis.enabled = false
-        let yAxis = lineChart.leftAxis
-        yAxis.labelFont = .boldSystemFont(ofSize: 12)
-        yAxis.setLabelCount(6, force: false)
-        yAxis.labelTextColor = .white
-        yAxis.axisLineColor = .white
-        
-        lineChart.xAxis.labelPosition = .bottom
-        lineChart.xAxis.labelFont = .boldSystemFont(ofSize: 12)
-        lineChart.xAxis.setLabelCount(6, force: false)
-        lineChart.animate(yAxisDuration: 3, easingOption: .easeOutQuart)
-        lineChart.xAxis.granularity = 1
-        lineChart.delegate = self
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         setupChartData()
         setupView()
@@ -41,7 +56,7 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
         view.addSubview(lineChart)
         
         lineChart.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(150)
+            make.top.equalToSuperview().inset(250)
             make.leading.equalToSuperview().inset(20)
             make.width.height.equalTo(340)
             
@@ -52,27 +67,27 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
         
         let realm = try! Realm()
         let myResult = realm.objects(NewExpenses.self)
-
+        
         var entries = [ChartDataEntry]()
         var dayTotalAmount: Double = 0
-
+        
         for i in 0..<myResult.count {
-
+            
             let graphableDatesAsDouble = myResult.map { $0.date.timeIntervalSince1970 }
             
             let formatter = DateFormatter()
             formatter.dateFormat = "d"
             let dayOfMonth = graphableDatesAsDouble[i]
-
+            
             if i != myResult.count - 1 {
-
+                
                 if formatter.string(from: myResult[i].date as Date) == formatter.string(from: myResult[i + 1].date as Date) {
-
+                    
                     dayTotalAmount += Double(myResult[i].amount) ?? 0
                 } else {
-
+                    
                     dayTotalAmount += Double(myResult[i].amount) ?? 0
-
+                    
                     entries.append(ChartDataEntry(x: dayOfMonth, y: dayTotalAmount))
                     dayTotalAmount = 0
                 }
@@ -81,13 +96,12 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
                 entries.append(BarChartDataEntry(x: dayOfMonth, y:  dayTotalAmount))
                 dayTotalAmount = 0
             }
-
+            
         }
-
-
+        
+        
         let set = LineChartDataSet(entries: entries, label: "Расходы")
-
-
+        
         set.colors = ChartColorTemplates.pastel()
         set.mode = .cubicBezier
         set.drawCirclesEnabled = true
@@ -100,11 +114,11 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
         set.highlightColor = .red
         set.fillColor = .white
         set.fillAlpha = 0.3
-
+        
         let data = LineChartData(dataSet: set)
         data.setDrawValues(true)
         
-        //new
+        //MARK: - Income data
         let myIncomeResult = realm.objects(NewIncome.self)
         
         var incomeEntries = [BarChartDataEntry]()
@@ -118,7 +132,7 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
             formatter.dateFormat = "d"
             
             let dayOfMonth = graphableDatesAsDouble[i]
-           
+            
             if i != myIncomeResult.count - 1 {
                 
                 if formatter.string(from: myIncomeResult[i].date as Date) == formatter.string(from: myIncomeResult[i + 1].date as Date) {
@@ -136,15 +150,16 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
                 incomeEntries.append(BarChartDataEntry(x: dayOfMonth, y:  dayTotalIncome))
                 dayTotalIncome = 0
             }
-                        
+            
         }
         let IncomeSet = BarChartDataSet(entries: incomeEntries, label: "Доходы")
         
         IncomeSet.colors = ChartColorTemplates.material()
-        IncomeSet.barBorderWidth = 1
+        IncomeSet.barBorderWidth = 10
         IncomeSet.barBorderColor = .red
         IncomeSet.highlightColor = .white
-
+        
+        //MARK: - Setup Combined Chart
         let combinedData: CombinedChartData = CombinedChartData()
         combinedData.lineData = LineChartData(dataSet: set)
         combinedData.barData = BarChartData(dataSet: IncomeSet)
@@ -153,9 +168,11 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
         
         lineChart.xAxis.valueFormatter = XAxisNameFormater()
         lineChart.xAxis.granularity = 1.0
+
+        
         lineChart.data = combinedData
     }
-
-  
-
+    
+    
+    
 }
