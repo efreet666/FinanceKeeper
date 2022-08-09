@@ -10,7 +10,31 @@ import Charts
 import SnapKit
 import RealmSwift
 
-class TotalChartViewController: UIViewController, ChartViewDelegate {
+class TotalChartViewController: UIViewController, ChartViewDelegate, CustomSegmentedControlDelegate {
+    
+    func change(to index: Int) {
+        switch index {
+        case 0:
+            print("1")
+            // In develop...
+            
+            let realm = try! Realm()
+            var weekAgo = NSDate(timeIntervalSinceNow: -604800)
+            var tommorow = NSDate(timeIntervalSinceNow: 86400)
+            let predicate = NSPredicate(format: "date > [c]%@", NSDate(timeIntervalSinceNow: -604800))
+            let myResult = realm.objects(NewExpenses.self).filter(predicate)
+            print(myResult)
+
+            
+            print(myResult)
+        case 1:
+            print("2")
+        default:
+            print("3")
+        }
+        
+    }
+    
     
     weak var interfaceSegmented: CustomSegmentedControl!{
            didSet{
@@ -22,28 +46,20 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
        
        override func viewDidLoad() {
            super.viewDidLoad()
-           let codeSegmented = CustomSegmentedControl(frame: CGRect(x: 0, y: 100, width: self.view.frame.width, height: 50), buttonTitle: ["Week","Month","All"])
-           codeSegmented.backgroundColor = .clear
-           view.addSubview(codeSegmented)
            
-           //
+           setupCustomSegmentControll()
            
-           lineChart.rightAxis.enabled = false
-           let yAxis = lineChart.leftAxis
-           yAxis.labelFont = .boldSystemFont(ofSize: 12)
-           yAxis.setLabelCount(6, force: false)
-           yAxis.labelTextColor = .white
-           yAxis.axisLineColor = .white
-           
-           lineChart.xAxis.labelPosition = .bottom
-           lineChart.xAxis.labelFont = .boldSystemFont(ofSize: 12)
-           lineChart.xAxis.setLabelCount(6, force: false)
-           lineChart.animate(yAxisDuration: 3, easingOption: .easeOutQuart)
-           lineChart.xAxis.granularity = 1
-           lineChart.delegate = self
        }
 
-
+    
+    func setupCustomSegmentControll() {
+        
+        let codeSegmented = CustomSegmentedControl(frame: CGRect(x: 0, y: 100, width: self.view.frame.width, height: 50), buttonTitle: ["Week","Month","All"])
+        codeSegmented.backgroundColor = .clear
+        view.addSubview(codeSegmented)
+        codeSegmented.delegate = self
+        
+    }
     // MARK: - Setup charts
     var lineChart = CombinedChartView()
 
@@ -51,6 +67,7 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
         setupChartData()
         setupView()
     }
+    
     func setupView() {
         
         view.addSubview(lineChart)
@@ -63,8 +80,24 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
         }
     }
     
+//MARK: - Setup Chart
     func setupChartData() {
         
+        lineChart.rightAxis.enabled = false
+        let yAxis = lineChart.leftAxis
+        yAxis.labelFont = .boldSystemFont(ofSize: 12)
+        yAxis.setLabelCount(6, force: false)
+        yAxis.labelTextColor = .white
+        yAxis.axisLineColor = .white
+        
+        lineChart.xAxis.labelPosition = .bottom
+        lineChart.xAxis.labelFont = .boldSystemFont(ofSize: 12)
+        lineChart.xAxis.setLabelCount(6, force: false)
+        lineChart.animate(yAxisDuration: 3, easingOption: .easeOutQuart)
+        lineChart.xAxis.granularity = 1
+        lineChart.delegate = self
+        
+        //MARK: - Expense data
         let realm = try! Realm()
         let myResult = realm.objects(NewExpenses.self)
         
@@ -98,8 +131,7 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
             }
             
         }
-        
-        
+
         let set = LineChartDataSet(entries: entries, label: "Расходы")
         
         set.colors = ChartColorTemplates.pastel()
@@ -169,10 +201,10 @@ class TotalChartViewController: UIViewController, ChartViewDelegate {
         lineChart.xAxis.valueFormatter = XAxisNameFormater()
         lineChart.xAxis.granularity = 1.0
 
-        
         lineChart.data = combinedData
     }
     
     
     
 }
+
