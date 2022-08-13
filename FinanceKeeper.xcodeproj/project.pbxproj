@@ -130,11 +130,11 @@
 		F54F6F2D288B3CFB003673C0 /* FinanceKeeper */ = {
 			isa = PBXGroup;
 			children = (
-				F54F6F3C288B3D00003673C0 /* Info.plist */,
 				F5FAD44E2898201A00392D6E /* Views */,
 				F54F6F46288C9ADD003673C0 /* Controllers */,
 				F54F6F47288C9AF3003673C0 /* Model */,
 				F54F6F48288C9AFA003673C0 /* Resourses */,
+				F54F6F3C288B3D00003673C0 /* Info.plist */,
 			);
 			path = FinanceKeeper;
 			sourceTree = "<group>";

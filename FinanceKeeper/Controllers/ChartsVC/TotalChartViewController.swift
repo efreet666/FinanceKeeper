@@ -12,25 +12,29 @@ import RealmSwift
 
 class TotalChartViewController: UIViewController, ChartViewDelegate, CustomSegmentedControlDelegate {
     
+    var currentInterval: dataInterval = .week
+    enum dataInterval {
+        case week
+        case mounth
+        case threeMonths
+        case all
+    }
+    
     func change(to index: Int) {
         switch index {
         case 0:
-            print("1")
-            // In develop...
-            
+            setupChartData(interval: .week)
+            // Get on-disk location of the default Realm
             let realm = try! Realm()
-            var weekAgo = NSDate(timeIntervalSinceNow: -604800)
-            var tommorow = NSDate(timeIntervalSinceNow: 86400)
-            let predicate = NSPredicate(format: "date > [c]%@", NSDate(timeIntervalSinceNow: -604800))
-            let myResult = realm.objects(NewExpenses.self).filter(predicate)
-            print(myResult)
-
-            
-            print(myResult)
+            print("Realm is located at:", realm.configuration.fileURL!)
         case 1:
-            print("2")
+            setupChartData(interval: .mounth)
+        case 2:
+            setupChartData(interval: .threeMonths)
+        case 3:
+            setupChartData(interval: .all)
         default:
-            print("3")
+            print("default")
         }
         
     }
@@ -38,7 +42,7 @@ class TotalChartViewController: UIViewController, ChartViewDelegate, CustomSegme
     
     weak var interfaceSegmented: CustomSegmentedControl!{
            didSet{
-               interfaceSegmented.setButtonTitles(buttonTitles: ["Week","Month","All"])
+               interfaceSegmented.setButtonTitles(buttonTitles: ["Week","Month", "3 months", "All"])
                interfaceSegmented.selectorViewColor = .blue
                interfaceSegmented.selectorTextColor = .blue
            }
@@ -54,7 +58,7 @@ class TotalChartViewController: UIViewController, ChartViewDelegate, CustomSegme
     
     func setupCustomSegmentControll() {
         
-        let codeSegmented = CustomSegmentedControl(frame: CGRect(x: 0, y: 100, width: self.view.frame.width, height: 50), buttonTitle: ["Week","Month","All"])
+        let codeSegmented = CustomSegmentedControl(frame: CGRect(x: 0, y: 100, width: self.view.frame.width, height: 50), buttonTitle: ["Week","Month", "3 months", "All"])
         codeSegmented.backgroundColor = .clear
         view.addSubview(codeSegmented)
         codeSegmented.delegate = self
@@ -64,7 +68,7 @@ class TotalChartViewController: UIViewController, ChartViewDelegate, CustomSegme
     var lineChart = CombinedChartView()
 
     override func viewWillAppear(_ animated: Bool) {
-        setupChartData()
+        setupChartData(interval: currentInterval)
         setupView()
     }
     
@@ -81,7 +85,7 @@ class TotalChartViewController: UIViewController, ChartViewDelegate, CustomSegme
     }
     
 //MARK: - Setup Chart
-    func setupChartData() {
+    func setupChartData(interval: dataInterval) {
         
         lineChart.rightAxis.enabled = false
         let yAxis = lineChart.leftAxis
@@ -99,33 +103,65 @@ class TotalChartViewController: UIViewController, ChartViewDelegate, CustomSegme
         
         //MARK: - Expense data
         let realm = try! Realm()
-        let myResult = realm.objects(NewExpenses.self)
+        var myExpenseResult = realm.objects(NewExpenses.self)
+        var myIncomeResult = realm.objects(NewIncome.self)
+        
+        let dateNow = NSDate(timeIntervalSinceNow: 0)
+        let predicateNow = NSPredicate(format: "date < [c]%@", dateNow)
+        
+        switch interval {
+        case .week:
+            
+            let weekAgo = NSDate(timeIntervalSinceNow: -604800)
+            let predicateWeekAgo = NSPredicate(format: "date > [c]%@", weekAgo)
+            
+            let queryWeek = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [predicateWeekAgo,predicateNow])
+            
+            myExpenseResult = realm.objects(NewExpenses.self).filter(queryWeek)
+            myIncomeResult = realm.objects(NewIncome.self).filter(queryWeek)
+        case .mounth:
+            let mounthAgo = NSDate(timeIntervalSinceNow: -604800 * 4)
+            let predicateMonthAgo = NSPredicate(format: "date > [c]%@", mounthAgo)
+            let queryMonth = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [predicateMonthAgo, predicateNow])
+            myExpenseResult = realm.objects(NewExpenses.self).filter(queryMonth)
+            myIncomeResult = realm.objects(NewIncome.self).filter(queryMonth)
+        case .threeMonths:
+            let threeMounthAgo = NSDate(timeIntervalSinceNow: -604800 * 4 * 3)
+            let predicateThreeMonthAgo = NSPredicate(format: "date > [c]%@", threeMounthAgo)
+            let queryThreeMonth = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [predicateThreeMonthAgo, predicateNow])
+            myExpenseResult = realm.objects(NewExpenses.self).filter(queryThreeMonth)
+            myIncomeResult = realm.objects(NewIncome.self).filter(queryThreeMonth)
+        case .all:
+            myExpenseResult = realm.objects(NewExpenses.self)
+            myIncomeResult = realm.objects(NewIncome.self)
+        
+        }
         
         var entries = [ChartDataEntry]()
         var dayTotalAmount: Double = 0
         
-        for i in 0..<myResult.count {
+        for i in 0..<myExpenseResult.count {
             
-            let graphableDatesAsDouble = myResult.map { $0.date.timeIntervalSince1970 }
+            let graphableDatesAsDouble = myExpenseResult.map { $0.date.timeIntervalSince1970 }
             
             let formatter = DateFormatter()
             formatter.dateFormat = "d"
             let dayOfMonth = graphableDatesAsDouble[i]
             
-            if i != myResult.count - 1 {
+            if i != myExpenseResult.count - 1 {
                 
-                if formatter.string(from: myResult[i].date as Date) == formatter.string(from: myResult[i + 1].date as Date) {
+                if formatter.string(from: myExpenseResult[i].date as Date) == formatter.string(from: myExpenseResult[i + 1].date as Date) {
                     
-                    dayTotalAmount += Double(myResult[i].amount) ?? 0
+                    dayTotalAmount += Double(myExpenseResult[i].amount) ?? 0
                 } else {
                     
-                    dayTotalAmount += Double(myResult[i].amount) ?? 0
+                    dayTotalAmount += Double(myExpenseResult[i].amount) ?? 0
                     
                     entries.append(ChartDataEntry(x: dayOfMonth, y: dayTotalAmount))
                     dayTotalAmount = 0
                 }
             } else {
-                dayTotalAmount += Double(myResult[i].amount) ?? 0
+                dayTotalAmount += Double(myExpenseResult[i].amount) ?? 0
                 entries.append(BarChartDataEntry(x: dayOfMonth, y:  dayTotalAmount))
                 dayTotalAmount = 0
             }
@@ -135,7 +171,7 @@ class TotalChartViewController: UIViewController, ChartViewDelegate, CustomSegme
         let set = LineChartDataSet(entries: entries, label: "Расходы")
         
         set.colors = ChartColorTemplates.pastel()
-        set.mode = .cubicBezier
+        set.mode = .linear
         set.drawCirclesEnabled = true
         set.drawCircleHoleEnabled = true
         set.circleHoleColor = .white
@@ -151,14 +187,13 @@ class TotalChartViewController: UIViewController, ChartViewDelegate, CustomSegme
         data.setDrawValues(true)
         
         //MARK: - Income data
-        let myIncomeResult = realm.objects(NewIncome.self)
         
         var incomeEntries = [BarChartDataEntry]()
         var dayTotalIncome: Double = 0
         
         for i in 0..<myIncomeResult.count {
             
-            let graphableDatesAsDouble = myResult.map { $0.date.timeIntervalSince1970 }
+            let graphableDatesAsDouble = myExpenseResult.map { $0.date.timeIntervalSince1970 }
             
             let formatter = DateFormatter()
             formatter.dateFormat = "d"
@@ -198,9 +233,10 @@ class TotalChartViewController: UIViewController, ChartViewDelegate, CustomSegme
         
         data.setDrawValues(false)
         
+        
+        lineChart.xAxis.granularity = 1
         lineChart.xAxis.valueFormatter = XAxisNameFormater()
-        lineChart.xAxis.granularity = 1.0
-
+        
         lineChart.data = combinedData
     }
     

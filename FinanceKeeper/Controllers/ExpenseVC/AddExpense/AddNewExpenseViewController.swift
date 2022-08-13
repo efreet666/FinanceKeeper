@@ -122,7 +122,7 @@ class AddNewExpenseViewController: UIViewController {
             myNewExpense.category = newExpenseCurrentCategory
             myNewExpense.amount = newExpenseAmountText ?? ""
             myNewExpense.name = expenseNameText ?? ""
-            myNewExpense.date = NSDate(timeIntervalSinceNow: 580000)
+            myNewExpense.date = NSDate(timeIntervalSinceNow: 0)
             
             try! realm.write {
                 realm.add(myNewExpense)
