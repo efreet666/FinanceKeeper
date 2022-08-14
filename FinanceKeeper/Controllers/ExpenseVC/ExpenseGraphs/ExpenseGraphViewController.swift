@@ -11,7 +11,7 @@ import SnapKit
 import RealmSwift
 
 class ExpenseGraphViewController: UIViewController, ChartViewDelegate, CustomSegmentedControlDelegate  {
-
+    
     var currentInterval: dataInterval = .week
     enum dataInterval {
         case week
@@ -27,7 +27,7 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate, CustomSeg
             // Get on-disk location of the default Realm
             let realm = try! Realm()
             print("Realm is located at:", realm.configuration.fileURL!)
-           
+            
         case 1:
             setupChartData(interval: .mounth)
         case 2:
@@ -42,12 +42,12 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate, CustomSeg
     
     
     weak var interfaceSegmented: CustomSegmentedControl!{
-           didSet{
-               interfaceSegmented.setButtonTitles(buttonTitles: ["Week","Month", "3 months", "All"])
-               interfaceSegmented.selectorViewColor = .blue
-               interfaceSegmented.selectorTextColor = .blue
-           }
-       }
+        didSet{
+            interfaceSegmented.setButtonTitles(buttonTitles: ["Week","Month", "3 months", "All"])
+            interfaceSegmented.selectorViewColor = .blue
+            interfaceSegmented.selectorTextColor = .blue
+        }
+    }
     
     var currentCategory = ""
     
@@ -55,7 +55,7 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate, CustomSeg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.view.backgroundColor = .black
         
         lineChart.delegate = self
@@ -65,11 +65,6 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate, CustomSeg
         setupView()
         setupChartData(interval: .week)
     }
-    
-    
-//    override func viewDidLayoutSubviews() {
-//        
-//    }
     
     func setupCustomSegmentControll() {
         
@@ -91,7 +86,7 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate, CustomSeg
             
         }
     }
-
+    
     func setupChartData(interval: dataInterval) {
         
         lineChart.rightAxis.enabled = false
@@ -107,7 +102,7 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate, CustomSeg
         lineChart.animate(yAxisDuration: 3, easingOption: .easeOutQuart)
         lineChart.xAxis.granularity = 1
         lineChart.delegate = self
-                
+        
         let realm = try! Realm()
         var myExpenseResult = realm.objects(NewExpenses.self)
         
@@ -139,7 +134,7 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate, CustomSeg
         case .all:
             myExpenseResult = realm.objects(NewExpenses.self).filter(predicateCategory)
             print(myExpenseResult)
-        
+            
         }
         
         var entries = [ChartDataEntry]()
@@ -172,10 +167,10 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate, CustomSeg
             }
             
         }
-
+        
         let set = LineChartDataSet(entries: entries, label: "\(currentCategory)")
         
-        set.colors = ChartColorTemplates.pastel()
+        
         set.mode = .linear
         set.drawCirclesEnabled = true
         set.drawCircleHoleEnabled = true
@@ -188,24 +183,24 @@ class ExpenseGraphViewController: UIViewController, ChartViewDelegate, CustomSeg
         set.fillColor = .white
         set.fillAlpha = 0.3
         let data = LineChartData(dataSet: set)
-     
+        
         lineChart.xAxis.valueFormatter = XAxisNameFormater()
         lineChart.xAxis.granularity = 1.0
         lineChart.data = data
     }
-   
-
+    
+    
 }
 
 final class XAxisNameFormater: NSObject, AxisValueFormatter {
-
+    
     func stringForValue( _ value: Double, axis _: AxisBase?) -> String {
-
+        
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "dd.MM"
-
+        
         return formatter.string(from: Date(timeIntervalSince1970: value))
     }
-
+    
 }

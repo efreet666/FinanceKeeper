@@ -221,7 +221,8 @@ class TotalChartViewController: UIViewController, ChartViewDelegate, CustomSegme
         }
         let IncomeSet = BarChartDataSet(entries: incomeEntries, label: "Доходы")
         
-        IncomeSet.colors = ChartColorTemplates.material()
+        let colors: [UIColor] = [UIColor.red]
+        IncomeSet.colors = colors
         IncomeSet.barBorderWidth = 10
         IncomeSet.barBorderColor = .red
         IncomeSet.highlightColor = .white
